@@ -1,0 +1,925 @@
+\ProvidesPackage{clrmac}[1998/08/05 v1.4 Authors' custom definitions]
+
+\RequirePackage{clrscode3e}			% for pseudocode
+\RequirePackage{url}
+\newcommand{\clrsurl}[1]{\useregularv\url{#1}\usepointyv}
+
+% Environment like description, but without a label.  Makes each item
+% have a hanging indent.
+\def\hanglistlabel#1{\hspace\labelsep}
+% \def\hanglist{\leftmarginii=1pc
+% \list{}{\labelsep=0pt\labelwidth\z@ \itemindent-1pc%\leftmargin
+% \let\makelabel\hanglistlabel}}
+\def\hanglist{\leftmarginii=1pc
+\list{}{\labelsep=0pt\labelwidth\z@ \itemindent=-\parindent
+\leftmargin=\parindent
+\let\makelabel\hanglistlabel}}
+\let\endhanglist\endlist
+
+\providecommand{\numref}[1]{%
+  \@ifundefined{r@#1}{000}{%
+    \expandafter\expandafter\expandafter\@firstoftwo
+    \csname r@#1\endcsname
+  }%
+}
+    
+% Part numbers print in Roman uppercase.
+\newcommand{\partref}[1]{\@Roman{\numref{#1}}}
+
+\newcommand{\gray}{\ensuremath{d}}
+\newcommand{\black}{\ensuremath{f}}
+\newcommand{\distance}{\ensuremath{d}}
+\newcommand{\II}{\mathcal{\altI}} % Used to denote family of independent sets.
+\newcommand{\be}{\begin{eqnarray*}}
+\newcommand{\ee}{\end{eqnarray*}}
+
+% \newlength{\digitwidth}
+% \settowidth{\digitwidth}{0}
+\newcommand{\dtab}{\hspace*{\digitwidth}}
+
+\newcommand{\solution}[1]{\problem{#1}}
+\newenvironment{solutions}{\begin{problems}}{\end{problems}}
+\newcommand{\solutionpart}{\problempart}
+\newenvironment{solutionparts}{\begin{problemparts}}{\end{problemparts}}
+
+\newcommand{\subheading}[1]{\subsubsection*{{\boldmath#1}}}
+\newcommand{\subsubheading}[1]{\paragraph*{{\boldmath#1}}}
+
+\newcommand{\inchapter}[1]{\label{ch:#1}\input{#1}}%% << need this?
+
+\newcommand{\chapternotes}{%
+  \ifinappendix\section*{Appendix notes}\else\section*{Chapter notes}\fi%
+  \ifinappendix\markright{Notes for Appendix \thechapter}\else\markright{Notes for Chapter \thechapter}\fi%
+  \ifnum\c@chapter=1 \gdef\thesection{}\fi
+}
+
+\newcommand{\chapterproblems}{%
+  \section*{Problems}%
+  \ifinappendix\markright{Problems for Appendix \thechapter}\else\markright{Problems for Chapter \thechapter}\fi%
+}
+
+% Notes to ourselves:
+\newcommand{\notefont}{\scriptsize}
+\def\clrpunt#1{\ignorespaces}
+\newcommand{\sknote}[1]{\clrnote{SK, #1}}
+\newcommand{\wjnnote}[1]{\clrnote{WJN, #1}}
+\newcommand{\dwnote}[1]{\clrnote{DW, #1}}
+\newcommand{\celnote}[1]{\clrnote{CEL, #1}}
+\newcommand{\copyedit}[1]{\clrnote{COPYEDIT #1}}
+\newcommand{\latecopyedit}[1]{\clrnote{LATE COPYEDIT #1}}
+\newcommand{\breakedit}[1]{\clrnote{REWROTE BAD BREAK #1}}
+\newif\ifseeclrnote
+\global\seeclrnotefalse
+\newcommand{\clrnotemsg}[1]{\ifseeclrnote\marginpar{\raggedright{\notefont #1}}\fi\ignorespaces}
+\newcommand{\clrnote}[1]{\clrnotemsg{#1}\typeout{CLR note in Chapter \thechapter}\ignorespaces}
+\newcommand{\seeclrnotes}{\global\seeclrnotetrue}
+\newcommand{\noclrnotes}{\global\seeclrnotefalse}
+
+%\noclrnotes	% STATE
+\seeclrnotes	% STATE
+
+\newif\ifseerevisions
+\global\seerevisionsfalse
+\newcommand{\seerevisions}{\global\seerevisionstrue}
+\newcommand{\norevisions}{\global\seerevisionsfalse}
+
+%\seerevisions	% STATE
+\norevisions
+
+% tag revision pages to filename.rev
+% use revpage to reformat filename.rev for dviselect
+%
+% \newwrite\outrev
+% \openout\outrev=\jobname.rev
+% \AtEndDocument{\closeout\outrev}% note lack of \immediate prefix
+
+% Have \beginrevision, \endrevision, \beginrevisionquiet,
+% and \endrevisionquiet ignore any revision lower than 1.3.
+
+\newcommand{\beginrevision}[1]{\ignorespaces}
+\def\endrevision#1{\ignorespaces}
+\newcommand{\beginrevisionquiet}[1]{\ignorespaces}
+\def\endrevisionquiet#1{\ignorespaces}
+\newcommand{\beginrevisionfloat}[1]{\ignorespaces}
+\def\endrevisionfloat#1{\ignorespaces}
+
+
+% \newcommand{\beginrevision}[2][b]{%
+%   \ifdim#2pt<1.3pt \else
+%     \write\outrev{#2 #1 \the\value{page}}%
+%     \ifseerevisions
+%       \marginpar{\raggedright{\notefont \if b#1$<$\else $>$\fi #2}}%
+%     \fi
+%   \fi \ignorespaces
+% }
+
+% \def\endrevision#1{\beginrevision[e]{#1}}
+
+% \newcommand{\beginrevisionquiet}[1]{%
+%   \begingroup \seerevisionsfalse \beginrevision{#1}\endgroup
+% }
+% \def\endrevisionquiet#1{%
+%   \begingroup \seerevisionsfalse \endrevision{#1}\endgroup
+% }
+
+%% For now, a revision in a float just adds the page containing
+%% the float to the .rev file
+
+% \def\beginrevisionfloat#1{\beginrevisionquiet{#1}}
+% \def\endrevisionfloat#1{\endrevisionquiet{#1}}
+
+% Where we stopped in revising a chapter:
+\newcommand{\clrstop}{\noindent\mbox{}\hrulefill\mbox{}}
+
+\newcommand{\smallset}[1]{\{ #1 \}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1\right|}
+\newcommand{\smallcard}[1]{|#1|}
+\newcommand{\card}[1]{\left| #1\right|}
+\newcommand{\smallfloor}[1]{\lfloor #1 \rfloor}
+\newcommand{\smallceil}[1]{\lceil #1 \rceil}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+
+% [mjd,1998/07/02] Comma-separated list in math that allows a line break
+% after the commas. Note: this does not forbid a line break after the
+% first or last comma in the list. But using \commachar instead of ","
+% will give a no-break comma. Or wrap the whole thing in \mbox.
+
+\newcommand{\brklist}[1]{%
+  \begingroup
+  \mathchardef\commachar=\mathcode`\,\relax
+  \mathcode`\,="8000 #1\endgroup
+}
+
+\begingroup
+\catcode`\,=\active
+\gdef,{\commachar\penalty999 \mskip0mu plus3mu minus1mu\relax}
+\endgroup
+
+\newcommand{\ang}[1]{\langle\brklist{#1}\rangle}
+
+\newcommand{\prob}[1]{\Pr\left\{ #1 \right\}}
+% \newcommand{\probshift}[2]{\Pr\raisebox{-#1}{$\displaystyle\left\{ \raisebox{#1}{$\displaystyle #2$} \right\}$}}
+\newcommand{\probshift}[2]{\Pr\raisebox{-#1}{$\displaystyle\LEFTRIGHT\lcbrace\rcbrace{\raisebox{#1}{$\displaystyle #2\;$}}$}}
+\newcommand{\expect}[1]{{\operator@font E}\left[ #1 \right]}
+\newcommand{\expectsq}[1]{{\operator@font E}^2\left[ #1 \right]}
+\newcommand{\expectshift}[2]{{\operator@font E}\raisebox{-#1}{$\displaystyle\left[ \raisebox{#1}{$\displaystyle #2$} \right]$}}
+\newcommand{\variance}[1]{{\operator@font Var}\left[ #1 \right]}
+
+% Usage: \adjustdelimiters{800}{1em}
+%
+% This means use max(0.800h,h-1em) as the delimiter height if "h" is
+% the height of the enclosed material. Arg 1 must be an integer in the
+% range 1..10000: the decimal form is obtained by dividing it by
+% 1000. This command affects *all* delimiters in the current math
+% formula, or the current column in an eqnarray (since the latter is
+% resolved internally to a separate math formula). [mjd,1998/08/05]
+%
+% Actually, delimiter heights usually increase in discrete steps of
+% about 3pt top and bottom (6pt total); this is dependent on the math
+% fonts that are used. So after computing the above
+% formula, TeX chooses the nearest delimiter symbol that is greater
+% than or equal to the target height.
+
+\newcommand{\adjustdelimiters}[2]{%
+  % \delimiter{factor,shortfall} values are not applied until the end of
+  % the current math formula; because of grouping complications with
+  % eqnarray and \[ \] (fleqn), simply changing their values locally is
+  % not good enough. So we have to go through this extra
+  % save/aftergroup/restore rigamarole.
+  \xdef\restoredelimitersizes{%
+    \relax
+    \noexpand\ifmmode
+      \aftergroup\noexpand\restoredelimitersizes
+    \noexpand\else
+      \global\delimiterfactor\the\delimiterfactor
+      \global\delimitershortfall\the\delimitershortfall
+      \relax
+      \global\let\noexpand\restoredelimitersizes\relax
+    \noexpand\fi
+  }%
+  \global\delimiterfactor=#1\relax
+  \global\delimitershortfall=#2\relax
+  \ifmmode \aftergroup\restoredelimitersizes \fi
+}
+
+\renewcommand{\choose}[2]{{{#1}\atopwithdelims(){#2}}}
+
+\def\pmod#1{\allowbreak\mkern12mu({\operator@font mod}\,\,#1)}
+
+\newcommand{\matxspace}{\hspace*{.25pc}}
+\newcommand{\matx}[2]{%
+%  \left(\matxspace\begin{array}{*{#1}{c}}#2\end{array}\matxspace\right)%
+  \PARENS{\matxspace\begin{array}{*{#1}{c}}#2\end{array}\matxspace}%
+}
+\newcommand{\matxrow}[2]{%
+  (\matxspace\begin{array}{*{#1}{c}}#2\end{array}\matxspace)%
+}
+\newcommand{\rmatx}[2]{%
+%  \left(\matxspace\begin{array}{*{#1}{r}}#2\end{array}\matxspace\right)%
+  \PARENS{\matxspace\begin{array}{*{#1}{r}}#2\end{array}\matxspace}%
+}
+
+% Redefine \bordermatrix to get \matxspace after left paren and before
+% right paren.
+%% NOT USED IN 3/e.
+
+\def\bordermatrix#1{\begingroup \m@th
+  \@tempdima 8.75\p@
+  \setbox\z@\vbox{%
+    \def\cr{\crcr\noalign{\kern2\p@\global\let\cr\endline}}%
+    \ialign{$##$\hfil\kern2\p@\kern\@tempdima&\thinspace\hfil$##$\hfil
+      &&\quad\hfil$##$\hfil\crcr
+      \omit\strut\hfil\crcr\noalign{\kern-\baselineskip}%
+      #1\crcr\omit\strut\cr}}%
+  \setbox\tw@\vbox{\unvcopy\z@\global\setbox\@ne\lastbox}%
+  \setbox\tw@\hbox{\unhbox\@ne\unskip\global\setbox\@ne\lastbox}%
+  \setbox\tw@\hbox{$\kern\wd\@ne\kern-\@tempdima
+    \matxspace\left(\matxspace
+    \kern-\wd\@ne
+    \global\setbox\@ne\vbox{\box\@ne\kern2\p@}%
+    \vcenter{\kern-\ht\@ne\unvbox\z@\kern-\baselineskip}\,\matxspace\right)$}%
+  \null\;\vbox{\kern\ht\@ne\box\tw@}\endgroup}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\cofactor}[1]{{\tilde{#1}}}
+\newcommand{\eqnline}{\\[.75ex]}
+\newcommand{\bigeqnline}{\\[1.2ex]}
+\newcommand{\dollar}[1]{\$$#1$}
+\newcommand{\relR}[2]{\mbox{$#1 \mathrel{R} #2$}}
+\newcommand{\percent}{\%}
+
+% Old \path definition that we've gone back to:
+\def\path#1{\stackrel{#1}{\leadsto}}
+\newcommand{\edge}{\rightarrow}
+% \path definition that looked bad, so we went back to the old one:
+% \newcommand{\path}[1]{\mathrel{\mathop{\rightarrow}\limits^{*}_{#1}}}
+\newcommand{\namededge}[3]{#1\mathrel{\mathop{\rightarrow}\limits_{#3}}#2}
+% More symbols that looked bad, so we punted them:
+%\newcommand{\uedge}{\mathrel{\mbox{$\bullet\hspace*{-.2em}$\xboldmath$-$\xunboldmath$\hspace*{-.2em}\bullet$}}}
+%\newcommand{\upath}[1]{\mathrel{\mathop{\mbox{$\bullet\hspace*{-.2em}$\xboldmath$-$\xunboldmath$\hspace*{-.2em}\bullet$}}\limits^{*}_{#1}}}
+%\newcommand{\nameduedge}[3]{#1\mathrel{\mathop{\mbox{$\bullet\hspace*{-.2em}$\xboldmath$-$\xunboldmath$\hspace*{-.2em}\bullet$}}\limits_{#3}}#2}
+\newcommand{\segment}[2]{\overline{#1#2}}
+\newcommand{\abv}[1]{\succcurlyeq_{#1}}
+% Amy's attempt at fixing \dirsegment...
+%\def\dirsegment#1#2{\vcenter{\ialign{##\cr\hrulefill\hskip1pt\lower1.87pt\hbox to0pt{\hss$\rightarrow$}\cr
+%\noalign{\nointerlineskip}
+%$\displaystyle#1#2$\cr}}}
+% Old versions of \dirsegment, supposedly superceded by Amy's attempt.
+%\newcommand{\dirsegment}[2]{{\boxmaxdepth=1000pt\relax\overrightarrow{#1#2}}}
+\newcommand{\dirsegment}[2]{\overrightarrow{#1#2}}
+%\newcommand{\subop}[2]{\mathbin{\mathop{#1_{#2}}}}
+
+\renewcommand{\P}{\func{\mbox{}P}}
+\newcommand{\NP}{\func{NP}}
+\newcommand{\NPC}{\func{NPC}}
+\newcommand{\coNP}{\func{co-NP}}
+\newcommand{\compl}[1]{\overline{#1}}
+\newcommand{\red}{\leq_{\operator@font P}}
+\newcommand{\emptystring}{\varepsilon}
+
+\newcommand{\Mz}{{\makebox[0.7ex]{$\cdot$}}}
+\newcommand{\Mp}{{\makebox[0.7ex]{\texttt{+}}}}
+\newcommand{\Mm}{{\makebox[0.7ex]{\texttt{-}}}}
+
+\newcommand{\se}{^{[0]}}
+\newcommand{\so}{^{[1]}}
+
+\newcommand{\wrong}[1]{\hspace*{#1}\Longleftarrow\mbox{\textit{wrong!!}}}
+\newcommand{\Omegainf}{\shortstack{{\scriptsize$\infty$}\\[-.5ex]$\Omega$}}
+\newcommand{\amortized}[1]{\what{#1}}
+\newcommand{\prefix}[2]{#1_{#2}}
+
+% Regular \hat is too wimpy.
+\renewcommand{\hat}[1]{\what{#1}}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\rationals}{\mathbb{Q}}
+\newcommand{\complex}{\mathbb{C}}
+\newcommand{\w}{\omega}			%% for fft chapter
+
+\newcommand{\transpose}{^{\operator@font T}}
+\newcommand{\transposeintext}{\textrm{\mdseries\upshape T}}
+\newcommand{\scc}{^{\operator@font SCC}}
+\newcommand{\rev}{^{\operator@font R}}
+
+% Closed semiring identities
+\newcommand{\oplusid}{\overline{0}}
+\newcommand{\odotid}{\overline{1}}
+\newcommand{\oident}{\overline{I}}
+
+\newcommand{\flow}{f}
+\newcommand{\posflow}{p}
+\newcommand{\capacity}{c}
+\newcommand{\lcapacity}{b}
+\newcommand{\excess}{e}
+\newcommand{\height}{h}
+\newcommand{\pamount}{\Delta}
+\newcommand{\pamountf}{\Delta_f}
+\newcommand{\Xbar}{\overline{X}}
+\newcommand{\Ubar}{\overline{U}}
+\newcommand{\Gf}{G_f}
+\newcommand{\Gfp}{G_{f'}}
+\newcommand{\Ef}{E_f}
+\newcommand{\Efp}{E_{f'}}
+\newcommand{\deltaf}{\delta_f}
+\newcommand{\deltafp}{\delta_{f'}}
+\newcommand{\capf}{c_f}
+\newcommand{\Gadm}{G_{f,h}}
+\newcommand{\Eadm}{E_{f,h}}
+\newcommand{\aug}[2]{#1 \mathop{\uparrow} #2}
+
+\newcommand{\hull}{{\operator@font CH}}
+
+\newcommand{\gftwo}{\ensuremath{\id{GF}(2)}}
+\newcommand{\Range}[1]{{\cal R}(#1)}
+\newcommand{\Preimage}[2]{{\cal P}(#1,#2)}
+\newcommand{\Block}[2]{{\cal B}(#1,#2)}
+
+\newcommand{\work}{T_1}
+\newcommand{\critpath}{T_{\infty}}
+\newcommand{\mttime}{T_P}
+\newcommand{\mttimeopt}{T^*_P}
+%\newcommand{\parallelism}{\overline{P}}
+%\newcommand{\slackness}{\sigma}
+
+%% Hashing notations
+\newcommand{\load}{\alpha}
+
+%% LP notations
+\newcommand{\entvar}{e}
+\newcommand{\leavevar}{l}
+\newcommand{\subjto}{subject to \nonumber \\[-1ex]}
+
+%% Number theory notations \divs, \ndivs, and \ndivsindex have new
+%% definitions due to the MathTime Pro 2 fonts.
+% \newcommand{\divs}{\mathrel |}
+% \newcommand{\ndivs}{\mathrel{\!\!\not|}}
+% \newcommand{\ndivsindex}{\mathrel{\!\not|}}
+\newcommand{\divs}{\mid}
+\newcommand{\ndivs}{\nmid}
+\newcommand{\lcm}{\mathop{\operator@font lcm}\nolimits}
+\newcommand{\sign}{\mathop{\operator@font sign}\nolimits}
+\newcommand{\Zn}{\integers_n}
+\newcommand{\Zp}{\integers_p}
+\newcommand{\Zq}{\integers_q}
+\newcommand{\Zm}{\integers_m}
+\newcommand{\dispLegendre}[2]{\PARENS{\frac{#1}{#2}}}
+\newcommand{\Legendre}[2]{\bigl(\frac{#1}{#2}\bigr)}
+\newcommand{\ord}{\mathop{\operator@font ord}\nolimits}
+\newcommand{\ind}{\mathop{\operator@font ind}\nolimits}
+%% ``imod'' is an ``in-line mod'' that leaves less space before the parens.
+\def\imod#1{\allowbreak \mkern10mu ({\operator@font mod}\,\,#1)}
+%% boldface imod
+\def\bimod#1{\allowbreak \mkern10mu (\hbox{mod}\,\,#1)}
+
+%% String-matching notations
+\newcommand{\isprefix}{\sqsubset}
+\newcommand{\issuffix}{\sqsupset}
+\newcommand{\suffix}{\sigma}
+\newcommand{\gapchar}{\diamondsuit}
+
+\newcommand{\Pp}[1]{P_{#1}}			% prefix of P
+% \newcommand{\Ps}[1]{P_{#1\twodots m}}		% suffix
+\newcommand{\Pb}[2]{P[#1\twodots #2]}		% both endpoints
+\newcommand{\Px}[1]{P[#1]}			% index
+
+\newcommand{\Prp}[1]{P'_{#1}}			% prefix of P'
+% \newcommand{\Prs}[1]{P'_{#1\twodots m}}  	% suffix
+\newcommand{\Prb}[2]{P'[#1\twodots #2]}		% both endpoints
+\newcommand{\Prx}[1]{P'[#1]}			% index
+
+\newcommand{\Tp}[1]{T_{#1}}			% prefix of T
+% \newcommand{\Ts}[1]{T_{#1\twodots n}}		% suffix
+\newcommand{\Tb}[2]{T[#1\twodots #2]}		% both endpoints
+\newcommand{\Tx}[1]{T[#1]}			% index
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% don't use the example environment; use ... ??
+
+\newenvironment{example}{\begin{xample}\rm}{\end{xample}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% theorem, lemma, corollary, example
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Defined terms are done as bold italic
+
+% In the LaTeX 2.09 version of \defn/\defi, \defi put in an italic
+% correction. In LaTeX2e, that is automatic (use \nocorr for the very
+% rare cases where the automatic guess is wrong). [mjd,1998/07/02]
+
+\newcommand{\defn}[1]{\textit{\bfseries\boldmath #1}}
+\newcommand{\defi}[1]{\defn{#1}}
+
+\newcommand{\textbfit}[1]{\textit{\textbf{#1}}}
+
+%    The \const, \proc, \id, \func, \lang commands may be used in math mode
+%    or text mode. For the first two we can avoid the overhead of
+%    \ensuremath because the math object is just \mathord, which
+%    \textnormal will produce anyway if used in math.
+
+% \newcommand{\const}[1]{\textnormal{\scshape#1}}
+% \newcommand{\proc}[1]{\textnormal{\scshape#1}}
+
+% \newcommand{\text@hyphens}{\mathcode`\-=`\-\relax}
+% \newcommand{\id}[1]{%
+%   \ensuremath{\mathop{\mathit{\text@hyphens#1}}\nolimits}}
+% \newcommand{\func}[1]{%
+%   \ensuremath{\mathop{\text@hyphens\operator@font#1}\nolimits}}
+\newcommand{\lang}[1]{\ensuremath{\mathop{\text@hyphens\operator@font#1}}}
+
+\newcommand{\ckt}[1]{\proc{#1}}
+\newcommand{\cktfam}[2]{\ensuremath{\ckt{#1}[#2]}}
+% \newcommand{\twodots}{\mathinner{\ldotp\ldotp}}
+
+%\newif\ifcodeinbox
+
+% \newcommand{\codeprocstrut}{%
+%   \ifli\else\ifcodeinbox \vrule width0pt height0pt depth 7pt\relax\fi\fi
+% }
+
+% Switches needed for tags in index entries.
+\newif\ifinproblem  \global\inproblemfalse
+\newif\ifinexercise \global\inexercisefalse
+\newif\ifindexasis  \global\indexasisfalse
+
+%% A flag for whether we should show index entries in the text itself.
+\newif\ifshowindex
+\showindexfalse
+%\showindextrue
+\ifshowindex%
+%\newcommand{\indexslug}{\marginpar{\rule{0.5in}{4pt}}}%
+\newcommand{\indexslug}{\rule{2em}{4pt}}%
+\renewcommand{\index}[1]{\indexslug\textbf{\slshape[#1] }}\fi
+
+\newcommand{\indextagspace}{\nolinebreak[4]\hspace*{.15em}\nolinebreak[4]}
+
+\newcommand{\see}[2]{\begingroup \indexasistrue
+  \index{\string#1[\string\textit{see} \string#2]}%
+  \endgroup
+}
+\newcommand{\seealso}[2]{%
+  \indexas{\string#1/ZZZZ}{\string\textit{see also} \string#2}%
+}
+
+\newcommand{\figindex}[1]{\begingroup \indexasistrue
+  \index{#1[0\string\indextagspace{}fig.]}%
+  \endgroup
+}
+
+\newcommand{\fnindex}[1]{\begingroup \indexasistrue
+  \index{#1[0\string\indextagspace{}n.]}%
+  \endgroup
+}
+
+\newcommand{\indexas}[2]{\begingroup\indexasistrue\index{#1{#2}[]}\endgroup}
+% The \string in these commands is needed to keep Tex from expanding
+% the \proc too early.
+\newcommand{\indexproc}[1]{\indexas{#1}{\string\proc{#1}}}
+\newcommand{\indexckt}[1]{\indexas{#1}{\string\ckt{#1}}}
+\newcommand{\indexlang}[1]{\indexas{#1}{\string\lang{#1}}}
+
+\newcommand{\procdecl}[1]{\indexproc{#1}\index{#1}\printprocdecl{#1}}
+\newcommand{\procdecltag}[2]{\indexas{#1#2}{\string\proc{#1}#2}
+  \index{#1#2}\printprocdecl{#1#2}}
+\newcommand{\printprocdecl}[1]{%
+  \proc{#1}}
+
+\newenvironment{codewithcostbox}{\global\procnamefalse%
+\code@init%
+\savebox{\savecode}\bgroup%
+\begin{minipage}[t]{\codeboxwidth}%
+\def\ifelsetab{\textbf{if} \=\textbf{else} }%
+\begin{tabbing}%
+99\=\ \ifelsetab \=\ifelsetab \=\ifelsetab \=\hspace*{1.25in}\=\hspace*{0.5in}\=\+\kill%
+}{%
+\ifnum\value{indent}=0\else\typeout{Warning: indentation problem in codebox on page \thepage}\fi%
+\end{tabbing}\end{minipage}\egroup%
+\addtolength{\topsep}{0.5ex}\begin{trivlist}\item\parindent=0pt%
+\ifprocname\saveprocname\nopagebreak\\[0.5ex] \nopagebreak\fi%
+\ifnum\value{codelinenumber}>9\hspace*{2\digitwidth}\else\hspace*{1\digitwidth}\fi%
+\usebox{\savecode}\end{trivlist}\addtolength{\topsep}{-0.5ex}\global\procnamefalse}
+
+% \newenvironment{widetable}{\table}{\endtable}
+
+% \newcommand{\widecodebox}[1]{\vskip1sp
+%   \hbox to\textwidth{\llap{\hbox to \textwidthextra{%
+%     \parbox{35.5pc}{\vspace{6pt}%
+%       \begin{code}#1\end{code}%
+%       \vskip6pt}\hss}}\hfill
+%   }%
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Parallel constructs
+\newcommand{\Vector}{\textbf{vector} }	% declare vectors
+\newcommand{\Where}{\textbf{where} }	% select processors
+\newcommand{\declpv}[2]{\pv{#1}\colon{#2}}	%declare a vector
+\newcommand{\pv}[1]{\id{#1}}		% vector
+\newcommand{\pvang}[1]{\hskip-1pt\relax\ang{#1}}
+\newcommand{\pvs}[2]{\pv{#1}\pvang{#2}}%vector with nonvector subscript
+\newcommand{\pvv}[2]{\pv{#1}\pvang{\pv{#2}}}  % vector with vector subscript
+\newcommand{\pvd}[2]{\pv{#1}_{#2}}      % vector with ``real'' subscript
+\newcommand{\pvds}[3]{\pvd{#1}{#2}\pvang{#3}} % vector with ``real'' and nonvector subscripts
+\newcommand{\pvdv}[3]{\pvd{#1}{#2}\pvang{\pv{#3}}} % vector with ``real'' and vector subscripts
+
+\newcommand{\self}{\const{I}}		% vector of processor indices
+\newcommand{\myrow}{\self_{\id{row}}}	% vector of 2D row indices
+\newcommand{\mycol}{\self_{\id{col}}}	% vector of 2D column indices
+
+% \renewcommand{\cases}[1]{\left\{ \begin{array}{ll}#1\end{array}\right.}
+\renewcommand{\cases}[1]{\def\arraystretch{1.2}\LEFTRIGHT\lcbrace.{\;\begin{array}{ll}#1\end{array}}}
+%% The \ccases command in mtpro2.sty doesn't leave enough space
+%% between the left brace and the cases.  This is a copy of \ccases
+%% with spacing adjustments.
+% \renewcommand{\cases}[1]{{%
+%   \def\arraystretch{1.2}%
+%   \LEFTRIGHT\lcbrace.{\:\array{l@{\quad}l@{}}#1\endarray}%
+% }}
+\newcommand{\cif}[1]{\mbox{if $#1$}}
+\newcommand{\cwhen}[1]{\mbox{when $#1$}}
+
+\def\useourcounter#1{\@nmbrlisttrue\def\@listctr{#1}}
+
+\newcounter{problemnum}
+
+% Redefined by THC for all problems within chapters.
+\newcommand{\theproblem}{\thechapter-\arabic{problemnum}}
+
+\newenvironment{problems}{%
+  \setcounter{problemnum}{0}\inproblemtrue
+}{%
+}
+
+\newcommand{\reportcompilation}{%
+  \typeout{ }
+  \typeout{Exercises: \thetotalexers}%
+  \typeout{  0 stars: \theexerszero}%
+  \typeout{  1 star:  \theexersone}%
+  \typeout{  2 stars: \theexerstwo}%
+  \typeout{  unrated: \theexersunrated}%
+  \typeout{Problems:  \thetotalprobs}%
+  \typeout{Captions:  \thetotalcaptions}%
+  \typeout{Art:       \thetotalart}%
+  \typeout{ }}
+
+\AtEndDocument{\reportcompilation}
+
+\DeclareMathSymbol{\SlantOmega}{\mathalpha}{letters}{"0A}
+
+\newcounter{totalprobs}
+
+%% Macro for problems added in 3/e.
+%\newcommand{\problemiii}[1]{\problem{#1}\clrnotemsg{New in 3/e}}
+\newcommand{\problemiii}[1]{\problem{#1}}
+
+\newcommand{\problem}[1]{%
+  \stepcounter{totalprobs}%
+  \setcounter{problempartnum}{0}%
+  \refstepcounter{problemnum}%
+  \let\@currentlabel=\theproblem
+  \paragraph{\theproblem\quad#1}}
+
+\newcounter{problempartnum}[problemnum]
+\newenvironment{problemparts}{%
+  \begin{list}{\hbox to 1pc{\bit{\alph{problempartnum}.}\hss}}{}%
+  \ifinproblem\itemsep7pt\relax\else\itemsep3pt\relax\fi
+}{%
+  \end{list}%
+}
+\newcommand{\problempart}{\stepcounter{problempartnum}\item}
+
+\newcounter{exercisenum}[section]
+\newcommand{\theexercise}{%
+  \thechapter\ifnum\c@section<1 \else.\arabic{section}\fi
+  -\arabic{exercisenum}%
+}
+
+\newenvironment{exercises}{%
+  \subsection*{Exercises}%
+  \inexercisetrue \setcounter{exercisenum}{0}%
+  \vspace{7pt}%
+}{
+  \par\vspace{6pt}%
+}
+
+\newcounter{totalexers}
+\newcounter{exersunrated}
+\newcounter{exerszero}
+\newcounter{exersone}
+\newcounter{exerstwo}
+
+\newcommand{\exercise}{%
+  \typeout{Warning: Unrated exercise in Chapter \thechapter}%
+  \stepcounter{totalexers}\stepcounter{exersunrated}%
+  \vspace{-6pt}\vskip1sp\relax
+  \stepcounter{exercisenum}%
+  \paragraph{\theexercise}%
+  \let\@currentlabel=\theexercise
+  \setcounter{problempartnum}{0}%
+}
+% preceding modified 2/25/89 by rlr to reset problempartnum so we can use
+% problem parts inside an exercise.
+
+\newcommand{\clrexercise}[1]{\vskip-6pt\vskip1sp\advance\c@exercisenum by 1\paragraph{\theexercise#1}\let\@currentlabel=\theexercise\c@problempartnum=0\relax}
+\newcommand{\exer}[1]{\addtocounter{totalexers}{1}\ifnum#1=0\addtocounter{exerszero}{1}\clrexercise{}\else\ifnum#1=1\addtocounter{exersone}{1}\clrexercise{\hspace*{1em}\verysmstar}\else\addtocounter{exerstwo}{1}\clrexercise{\hspace*{.5em}\verysmstar\verysmstar}\fi\fi}
+
+%% Macro for exercises added in 3/e.
+%\newcommand{\exeriii}[1]{\exer{#1}\clrnotemsg{New in 3/e}}
+\newcommand{\exeriii}[1]{\exer{#1}}
+
+\newcommand{\hint}{\emph{Hint:}\ }
+\newcommand{\optional}{\emph{Optional:}\ }
+
+% Macros for answers and ``noanswers'' to problems and exercises.
+
+% Use the LaTeX "verbatim" package which provides facilities for
+% processing an environment one line at a time. Changing the definition
+% of \verbatim@processline allows writing the contents out to an
+% external file or discarding the contents, as desired.
+
+\RequirePackage{verbatim}[1995/12/01]
+
+% Redefine \comment after loading verbatim pkg (name conflict)
+\renewcommand{\comment}[1]{\ignorespaces}
+
+%    The answer environment discards it contents. This definition is
+%    essentially a copy of the "comment" environment from the verbatim
+%    pkg.
+
+\newif\ifprintanswers
+\printanswersfalse
+%\printanswerstrue
+
+\ifprintanswers
+\newenvironment{answer}{\par}{\par}
+\else%
+\newenvironment{answer}{%
+  \par
+  \let\do\@makeother\dospecials\catcode`\^^M\active
+  \let\verbatim@startline\relax
+  \let\verbatim@addtoline\@gobble
+  \let\verbatim@processline\relax
+  \let\verbatim@finish\relax
+  \verbatim@
+}{%
+  \par
+}
+\fi
+
+% The \noanswer macro has no arguments
+\newcommand{\noanswer}{}
+
+\newcommand{\alabel}[1]{\label{#1}}
+
+% Macros to make captions print with small type and 'Figure xx' in bold.
+
+\let\savethefigure\thefigure
+
+\newif\ifinrecto
+\inrectofalse
+
+\newcommand{\normalfigure}{\inrectofalse\def\fnum@figure{{\ninepoint\bfseries Figure \thefigure}}}
+\normalfigure
+\newcommand{\continuedfigure}{\inrectotrue\def\fnum@figure{{\ninepoint\bfseries Figure \thefigure, continued}}\addtocounter{figure}{-1}}
+\def\fnum@table{\textbf{Table \thetable}}
+\let\@mycaption\caption
+\let\mycaption\caption
+
+\newcounter{totalcaptions}
+\newcounter{totalart}
+
+\newcommand{\figcaption}[1]{\addtocounter{totalcaptions}{1}\caption[]{#1}}
+
+% \psfigures determines what to do for figures:
+%	0 means insert the PostScript version of the figure
+%       1 is like 0 but with a framebox around the PostScript version
+%       2 means just leave a framebox with the figure name
+\newcommand{\psfigures}{0}
+\newcommand{\macfigures}{%
+%  \AtBeginDvi{\special{header=mac.MDII.pro}}%
+  \renewcommand{\psfigures}{0}}
+\newcommand{\framefigures}{\renewcommand{\psfigures}{1}}
+\newcommand{\namefigures}{\renewcommand{\psfigures}{2}}
+
+\macfigures	% STATE
+
+%% When calling \figspace, make sure to leave a blank line afterward!!
+%% \widefigspace is for figures that are more than \textwidth wide.
+%\newlength{\halffigspace} \newlength{\wholefigspace}
+%\newlength{\figruleheight} \newlength{\figgap}
+%\newcommand{\setfiglengths}{\ifnum\psfigures=1\setlength{\figruleheight}{\hruleheight}\setlength{\figgap}{1em}\else\setlength{\figruleheight}{0pt}\setlength{\figgap}{0em}\fi}
+%\newcommand{\figspace}[2]{\ifnum\psfigures=0\leavefigspace{#1}\else%
+%\setfiglengths%
+%\setlength{\wholefigspace}{#1}\setlength{\halffigspace}{.5\wholefigspace}%
+%\rule[-\halffigspace]{\figruleheight}{\wholefigspace}\hspace{\figgap}#2\fi}
+%\newlength{\widefigspacewidth}
+%% Make \widefigspace put the figure flush right on the text page.
+%\newcommand{\widefigspace}[2]{
+%\ifnum\psfigures=0\leavefigspace{#1}\else%
+%\setfiglengths%
+%\setlength{\widefigspacewidth}{\textwidth}%
+%\addtolength{\widefigspacewidth}{-\figruleheight}%
+%\setlength{\wholefigspace}{#1}\setlength{\halffigspace}{.5\wholefigspace}%
+%\makebox[\widefigspacewidth][r]{#2\hspace{\figgap}}\rule[-\halffigspace]{\figruleheight}{\wholefigspace}\fi}
+%\newcommand{\leavefigspace}[1]{\setlength{\wholefigspace}{#1}\setlength{\halffigspace}{.5\wholefigspace}\rule[-\halffigspace]{0em}{\wholefigspace}}
+
+% Commands for including figures.
+
+\newcommand{\psfred}{0.83}
+\newcommand{\psfredsmall}{0.75}
+
+% \newif\iffileexists
+% \newcommand{\checkfile}[1]{\openin2=#1 \ifeof2 \fileexistsfalse\else\fileexiststrue\fi\closein2}
+\ifnum\psfigures=0\usepackage{../styles/psfrag}\fi
+%\usepackage{psfrag}
+
+%\newif\ifclipmacfig\clipmacfigfalse
+
+\newlength{\figbbwidth}
+\newlength{\shlamount}
+
+% \newwrite\figpages
+% \openout\figpages=\jobname.figpages
+% \AtEndDocument{\closeout\figpages}% note lack of \immediate prefix
+
+\newcommand{\insertitnow}[2]{%
+% \write\figpages{\the\value{page}}
+\ifnum\psfigures=0
+\scalebox{#2}{\includegraphics{figures/#1.eps}}
+\else
+\framebox{\includegraphics{figures/#1.eps}}
+\fi}
+
+\newlength{\figflushrightadjust}
+\setlength{\figflushrightadjust}{1.5pt}
+
+\newlength{\extrafigadjust}
+\newcommand{\normaladjustfig}{\setlength{\extrafigadjust}{0pt}}
+\newcommand{\adjustfig}[1]{\addtolength{\extrafigadjust}{#1}}
+\normaladjustfig
+
+\newcommand{\insertmacfigure}[2]{%
+  \ifinrecto\else\addtocounter{totalart}{1}\fi%
+  \begin{flushleft}
+  \ifnum\psfigures<2
+      \checkfile{figures/#1.psfrag}
+      \iffileexists\input{figures/#1.psfrag}\fi
+      \checkfile{figures/#1.eps}
+      \iffileexists
+	\makeatletter
+	\Gread@eps{figures/#1.eps}
+	\setlength{\figbbwidth}{\Gin@urx bp}
+	\addtolength{\figbbwidth}{-\Gin@llx bp}
+        \makeatother
+% 	\ifclipmacfig
+% % 	\typeout{clipmacfig}
+%           \hspace*{-\textwidthextra}\mbox{\resizebox{35.5pc}{!}{\insertitnow{#1}{#2}}}
+%	\else
+	  \ifdim\figbbwidth>\textwidth
+	     \ifdim\figbbwidth>35.5pc
+		\hspace*{-\textwidthextra}\hspace*{\figflushrightadjust}\mbox{\resizebox{35.5pc}{!}{\insertitnow{#1}{#2}}}
+%		\typeout{#1.eps IS TOO WIDE!!}
+	    \else
+%  	      \typeout{wide fig}
+              \setlength{\shlamount}{\figbbwidth}
+              \addtolength{\shlamount}{-\textwidth}
+			  \addtolength{\shlamount}{\figflushrightadjust}
+			  \addtolength{\shlamount}{\extrafigadjust}
+              \hspace*{-\shlamount}\mbox{\insertitnow{#1}{#2}}
+ 	    \fi
+	  \else
+% 	    \typeout{regular fig}
+	    \hspace*{-\extrafigadjust}\mbox{\insertitnow{#1}{#2}}
+	  \fi
+%        \fi
+      \else
+			\framebox{\textit{#1.eps not found}}
+		 	\typeout{#1.eps not found}
+      \fi
+  \else
+      \framebox{#1}
+  \fi
+  \end{flushleft}
+  \vskip -\lastskip
+}
+
+% \newcommand{\macfigure}[5]{\clipmacfigfalse\insertmacfigure{#1}}
+% \newcommand{\clipmacfigure}[5]{\clipmacfigtrue\insertmacfigure{#1}}
+\newcommand{\macfigure}[1]{\insertmacfigure{#1}{1.0}}
+%% For Adobe Illustrator figures.  First arg is the figure name,
+%% second arg is the amount to scale by.
+\newcommand{\aifigure}[2]{\insertmacfigure{#1}{#2}}
+
+% Environment to make a figure float to a verso.
+
+\newenvironment{versofigure}{%
+  \ifodd\count\z@ \global\@topnum\z@\fi
+  \begin{figure}[tp]}{\end{figure}%
+}
+
+\newenvironment{rectofigure}{\begin{figure}[tp]\continuedfigure}{\normalfigure\end{figure}}
+
+\newenvironment{versofiguretop}{%
+  \ifodd\count\z@ \global\@topnum\z@\fi
+  \begin{figure}[t]}{\end{figure}%
+}
+
+\newenvironment{rectofiguretop}{\begin{figure}[t]\continuedfigure}{\normalfigure\end{figure}}
+
+\newenvironment{versofigurepage}{%
+  \begin{versofigure}\vbox to\textheight\bgroup
+}{%
+  \vfill\egroup\end{versofigure}%
+}
+
+\newenvironment{rectofigurepage}{%
+  \begin{rectofigure}\vbox to\textheight\bgroup
+}{%
+  \vfill\egroup\end{rectofigure}%
+}
+
+\newcommand{\figpart}[1]{\textbf{\boldmath(#1)}\nolinebreak[4]\relax}
+\newcommand{\figparts}[2]{\mbox{\textbf{\boldmath(#1)\ndash (#2)}}\nolinebreak[4]\relax}
+
+\newlength{\savearraycolsep}
+\newcommand{\normalarray}{\setlength{\arraycolsep}{\savearraycolsep}}
+\newcommand{\narrowarray}[1]{%
+  \setlength{\savearraycolsep}{\arraycolsep}%
+  \setlength{\arraycolsep}{#1\arraycolsep}%
+}
+
+\newlength{\savetabcolsep}
+\newcommand{\normaltabular}{\setlength{\tabcolsep}{\savetabcolsep}}
+\newcommand{\narrowtabular}[1]{%
+  \setlength{\savetabcolsep}{\tabcolsep}%
+  \setlength{\tabcolsep}{#1\tabcolsep}%
+}
+
+\def\diagdots{\hbox{\hskip2pt\raise5pt\hbox{.}\hskip1pt\raise8pt\hbox{.}\hskip1pt\raise11pt\hbox{.}\hskip2pt\vrule height16pt width0pt}}
+
+%% NOT USED IN 3/e.
+\def\powertwos#1#2{\hbox{${#12}\diagdots^{#12}\raise7pt\vbox to0pt{\vss\hbox{$\left.\vrule height12.49pt width0pt\right\}$\raise1pt\hbox{$#1#2$}}}
+$}}
+
+%% for powertwos that are used in superscript
+%% NOT USED IN 3/e.
+\def\secondpowertwos#1#2{\lower3pt\hbox{${#12}\diagdots^{#12}\raise7pt\vbox to0pt{\vss\hbox{$\left.\vrule height12.49pt width0pt\right\}$\raise1pt\hbox{$#1#2$}}}
+$}}
+
+% The following is used to control copyright printing
+\newif\ifdraft \draftfalse
+
+%\input{hyphenation.cfg}
+\input{hyphen.cfg}
+\newcommand{\hyphen}{-}			% for Bibtex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional commands and environments [mjd,1998/06/29]
+
+\newcommand{\mdash}{\textemdash}
+\newcommand{\ndash}{\textendash}
+\newcommand{\qq}[1]{``#1''}% double quotes
+% \newcommand{\kw}[1]{\textbf{#1}}% key word
+\newcommand{\as}[1]{\texttt{#1}}% ascii string
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calT}{\mathcal{T}}
+
+\newcommand{\text}[1]{\nfss@text{#1}}
+
+
+%%% for indicator random variables
+\newcommand{\indic}[1]{{\operator@font I}\left\{ #1 \right\} }
+\newcommand{\indicstart}{{\operator@font I}\left\{ }
+\newcommand{\indicstop}{\right\}}
+
+%%% for LP 
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\flowcost}{a}
+\newcommand{\obj}{z}
+\newcommand{\aux}{_{\operator@font aux}}
+
+%%% for vEB trees
+\newcommand{\uppersqrt}[1]{\sqrt[\uparrow]{#1}}
+\newcommand{\lowersqrt}[1]{\sqrt[\downarrow]{#1}}
+
+%%% for Czech names
+\newcommand{\czechucirc}{\accent23u}
+
+\endinput %

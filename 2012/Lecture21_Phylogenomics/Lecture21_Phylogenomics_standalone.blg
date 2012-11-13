@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2012)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Lecture21_Phylogenomics_standalone.aux
+The style file: plain.bst
+Database file #1: Lecture21_Phylogenomics.bib
+You've used 9 entries,
+            2118 wiz_defined-function locations,
+            570 strings with 5691 characters,
+and the built_in function-call counts, 3420 in all, are:
+= -- 313
+> -- 222
+< -- 0
++ -- 88
+- -- 78
+* -- 296
+:= -- 605
+add.period$ -- 27
+call.type$ -- 9
+change.case$ -- 66
+chr.to.int$ -- 0
+cite$ -- 9
+duplicate$ -- 96
+empty$ -- 222
+format.name$ -- 78
+if$ -- 675
+int.to.chr$ -- 0
+int.to.str$ -- 9
+missing$ -- 9
+newline$ -- 48
+num.names$ -- 18
+pop$ -- 48
+preamble$ -- 1
+purify$ -- 57
+quote$ -- 0
+skip$ -- 70
+stack$ -- 0
+substring$ -- 196
+swap$ -- 9
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 36
+warning$ -- 0
+while$ -- 24
+width$ -- 10
+write$ -- 101
