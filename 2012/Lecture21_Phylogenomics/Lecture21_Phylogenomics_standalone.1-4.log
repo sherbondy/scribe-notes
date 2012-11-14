@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  13 NOV 2012 18:38
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  13 NOV 2012 19:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -630,144 +630,134 @@ ure21_Phylogenomics_standalone.toc)
 \tf@lof=\write7
 \openout7 = `Lecture21_Phylogenomics_standalone.lof'.
 
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
 [3]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
-<images/Fig01_HeuristicTreeSearch.png, id=138, 933.4875pt x 423.5825pt>
+<images/Fig01_HeuristicTreeSearch.png, id=133, 933.4875pt x 423.5825pt>
 File: images/Fig01_HeuristicTreeSearch.png Graphic file (type png)
 <use images/Fig01_HeuristicTreeSearch.png>
 Package pdftex.def Info: images/Fig01_HeuristicTreeSearch.png used on input lin
-e 91.
+e 70.
 (pdftex.def)             Requested size: 933.48523pt x 423.58147pt.
-<images/Fig02_MLScoringStep.png, id=139, 619.31375pt x 193.72375pt>
+<images/Fig02_MLScoringStep.png, id=134, 619.31375pt x 193.72375pt>
 File: images/Fig02_MLScoringStep.png Graphic file (type png)
 <use images/Fig02_MLScoringStep.png>
-Package pdftex.def Info: images/Fig02_MLScoringStep.png used on input line 100.
-
+Package pdftex.def Info: images/Fig02_MLScoringStep.png used on input line 79.
 (pdftex.def)             Requested size: 619.31224pt x 193.72327pt.
-<images/Fig03_SiteEvolution.png, id=140, 303.1325pt x 154.5775pt>
+<images/Fig03_SiteEvolution.png, id=135, 303.1325pt x 154.5775pt>
 File: images/Fig03_SiteEvolution.png Graphic file (type png)
 <use images/Fig03_SiteEvolution.png>
-Package pdftex.def Info: images/Fig03_SiteEvolution.png used on input line 114.
-
+Package pdftex.def Info: images/Fig03_SiteEvolution.png used on input line 93.
 (pdftex.def)             Requested size: 303.13176pt x 154.5771pt.
-<images/Fig04_SequenceEvolution.png, id=142, 356.33125pt x 181.67876pt>
+<images/Fig04_SequenceEvolution.png, id=137, 356.33125pt x 181.67876pt>
 File: images/Fig04_SequenceEvolution.png Graphic file (type png)
 <use images/Fig04_SequenceEvolution.png>
 Package pdftex.def Info: images/Fig04_SequenceEvolution.png used on input line 
-123.
+102.
 (pdftex.def)             Requested size: 356.33037pt x 181.6783pt.
-<images/Fig05_SequenceEvolutionOverTree.png, id=143, 575.14874pt x 333.245pt>
+[4 <./images/Fig01_HeuristicTreeSearch.png> <./images/Fig02_MLScoringStep.png> 
+<./images/Fig03_SiteEvolution.png> <./images/Fig04_SequenceEvolution.png>] <ima
+ges/Fig05_SequenceEvolutionOverTree.png, id=145, 575.14874pt x 333.245pt>
 File: images/Fig05_SequenceEvolutionOverTree.png Graphic file (type png)
 <use images/Fig05_SequenceEvolutionOverTree.png>
 Package pdftex.def Info: images/Fig05_SequenceEvolutionOverTree.png used on inp
-ut line 135.
+ut line 114.
 (pdftex.def)             Requested size: 575.14734pt x 333.24417pt.
-[4 <./images/Fig01_HeuristicTreeSearch.png> <./images/Fig02_MLScoringStep.png> 
-<./images/Fig03_SiteEvolution.png>] <images/Fig06_PeelingAlgorithm.png, id=151,
- 600.2425pt x 236.885pt>
+<images/Fig06_PeelingAlgorithm.png, id=146, 600.2425pt x 236.885pt>
 File: images/Fig06_PeelingAlgorithm.png Graphic file (type png)
 <use images/Fig06_PeelingAlgorithm.png>
 Package pdftex.def Info: images/Fig06_PeelingAlgorithm.png used on input line 1
-62.
+41.
 (pdftex.def)             Requested size: 600.24103pt x 236.88441pt.
-<images/Fig07_GeneFamilyEvolution.png, id=152, 790.955pt x 463.7325pt>
+<images/Fig07_GeneFamilyEvolution.png, id=147, 790.955pt x 463.7325pt>
 File: images/Fig07_GeneFamilyEvolution.png Graphic file (type png)
 <use images/Fig07_GeneFamilyEvolution.png>
 Package pdftex.def Info: images/Fig07_GeneFamilyEvolution.png used on input lin
-e 181.
+e 160.
 (pdftex.def)             Requested size: 790.95308pt x 463.73135pt.
 
-<images/Fig08_MaximumParsimonyReconciliation.png, id=153, 701.62125pt x 281.05p
+<images/Fig08_MaximumParsimonyReconciliation.png, id=148, 701.62125pt x 281.05p
 t>
 File: images/Fig08_MaximumParsimonyReconciliation.png Graphic file (type png)
 <use images/Fig08_MaximumParsimonyReconciliation.png>
 Package pdftex.def Info: images/Fig08_MaximumParsimonyReconciliation.png used o
-n input line 190.
+n input line 169.
 (pdftex.def)             Requested size: 701.61952pt x 281.0493pt.
-<images/Fig09_MPRAlgorithm.png, id=154, 934.49126pt x 329.23pt>
+<images/Fig09_MPRAlgorithm.png, id=149, 934.49126pt x 329.23pt>
 File: images/Fig09_MPRAlgorithm.png Graphic file (type png)
 <use images/Fig09_MPRAlgorithm.png>
-Package pdftex.def Info: images/Fig09_MPRAlgorithm.png used on input line 201.
+Package pdftex.def Info: images/Fig09_MPRAlgorithm.png used on input line 180.
 (pdftex.def)             Requested size: 934.48898pt x 329.22919pt.
-<images/Fig10_LearningAcrossGeneTrees.png, id=155, 790.955pt x 437.635pt>
+<images/Fig10_LearningAcrossGeneTrees.png, id=150, 790.955pt x 437.635pt>
 File: images/Fig10_LearningAcrossGeneTrees.png Graphic file (type png)
 <use images/Fig10_LearningAcrossGeneTrees.png>
 Package pdftex.def Info: images/Fig10_LearningAcrossGeneTrees.png used on input
- line 214.
+ line 193.
 (pdftex.def)             Requested size: 790.95308pt x 437.63393pt.
-[5 <./images/Fig04_SequenceEvolution.png> <./images/Fig05_SequenceEvolutionOver
-Tree.png> <./images/Fig06_PeelingAlgorithm.png>] <images/Fig11_DevelopingRatesM
-odel.png, id=162, 868.24374pt x 557.08125pt>
+<images/Fig11_DevelopingRatesModel.png, id=151, 868.24374pt x 557.08125pt>
 File: images/Fig11_DevelopingRatesModel.png Graphic file (type png)
 <use images/Fig11_DevelopingRatesModel.png>
 Package pdftex.def Info: images/Fig11_DevelopingRatesModel.png used on input li
-ne 226.
+ne 205.
 (pdftex.def)             Requested size: 868.24162pt x 557.0799pt.
-[6 <./images/Fig07_GeneFamilyEvolution.png> <./images/Fig08_MaximumParsimonyRec
-onciliation.png> <./images/Fig09_MPRAlgorithm.png> <./images/Fig10_LearningAcro
-ssGeneTrees.png>] <images/Fig12_UsingRateModels.png, id=169, 956.57375pt x 482.
-80376pt>
+[5 <./images/Fig05_SequenceEvolutionOverTree.png> <./images/Fig06_PeelingAlgori
+thm.png>] <images/Fig12_UsingRateModels.png, id=158, 956.57375pt x 482.80376pt>
 File: images/Fig12_UsingRateModels.png Graphic file (type png)
 <use images/Fig12_UsingRateModels.png>
-Package pdftex.def Info: images/Fig12_UsingRateModels.png used on input line 24
-0.
+Package pdftex.def Info: images/Fig12_UsingRateModels.png used on input line 21
+9.
 (pdftex.def)             Requested size: 956.57141pt x 482.80258pt.
-<images/Fig13_FisherWrightModel.png, id=170, 862.22125pt x 429.605pt>
+[6 <./images/Fig07_GeneFamilyEvolution.png> <./images/Fig08_MaximumParsimonyRec
+onciliation.png> <./images/Fig09_MPRAlgorithm.png> <./images/Fig10_LearningAcro
+ssGeneTrees.png>] <images/Fig13_FisherWrightModel.png, id=165, 862.22125pt x 42
+9.605pt>
 File: images/Fig13_FisherWrightModel.png Graphic file (type png)
 <use images/Fig13_FisherWrightModel.png>
 Package pdftex.def Info: images/Fig13_FisherWrightModel.png used on input line 
-259.
+238.
 (pdftex.def)             Requested size: 862.21915pt x 429.60394pt.
 
-<images/Fig14_FisherWrightManyGenerations.png, id=171, 1389.19pt x 668.4975pt>
+<images/Fig14_FisherWrightManyGenerations.png, id=166, 1389.19pt x 668.4975pt>
 File: images/Fig14_FisherWrightManyGenerations.png Graphic file (type png)
 <use images/Fig14_FisherWrightManyGenerations.png>
 Package pdftex.def Info: images/Fig14_FisherWrightManyGenerations.png used on i
-nput line 268.
+nput line 247.
 (pdftex.def)             Requested size: 1389.18663pt x 668.49586pt.
-<images/Fig15_CoalescentModel.png, id=172, 502.87875pt x 627.34375pt>
+[7 <./images/Fig11_DevelopingRatesModel.png> <./images/Fig12_UsingRateModels.pn
+g> <./images/Fig13_FisherWrightModel.png>] <images/Fig15_CoalescentModel.png, i
+d=173, 502.87875pt x 627.34375pt>
 File: images/Fig15_CoalescentModel.png Graphic file (type png)
 <use images/Fig15_CoalescentModel.png>
-Package pdftex.def Info: images/Fig15_CoalescentModel.png used on input line 28
-1.
+Package pdftex.def Info: images/Fig15_CoalescentModel.png used on input line 26
+0.
 (pdftex.def)             Requested size: 502.87752pt x 627.34221pt.
-<images/Fig16_CoalescentProbDist.png, id=173, 636.3775pt x 441.65pt>
+<images/Fig16_CoalescentProbDist.png, id=174, 636.3775pt x 441.65pt>
 File: images/Fig16_CoalescentProbDist.png Graphic file (type png)
 <use images/Fig16_CoalescentProbDist.png>
 Package pdftex.def Info: images/Fig16_CoalescentProbDist.png used on input line
- 293.
+ 272.
 (pdftex.def)             Requested size: 636.37595pt x 441.64891pt.
-[7 <./images/Fig11_DevelopingRatesModel.png> <./images/Fig12_UsingRateModels.pn
-g>]
-
-LaTeX Warning: Text page 8 contains only floats.
-
-[8 <./images/Fig13_FisherWrightModel.png> <./images/Fig14_FisherWrightManyGener
-ations.png> <./images/Fig15_CoalescentModel.png>] <images/Fig17_MultispeciesCoa
-lescent.png, id=184, 732.7375pt x 555.07375pt>
+<images/Fig17_MultispeciesCoalescent.png, id=175, 732.7375pt x 555.07375pt>
 File: images/Fig17_MultispeciesCoalescent.png Graphic file (type png)
 <use images/Fig17_MultispeciesCoalescent.png>
 Package pdftex.def Info: images/Fig17_MultispeciesCoalescent.png used on input 
-line 304.
+line 283.
 (pdftex.def)             Requested size: 732.73572pt x 555.07237pt.
-[9 <./images/Fig16_CoalescentProbDist.png> <./images/Fig17_MultispeciesCoalesce
-nt.png>] <images/Fig18_AlternateReconciliations.png, id=191, 445.665pt x 281.05
-pt>
+[8 <./images/Fig14_FisherWrightManyGenerations.png> <./images/Fig15_CoalescentM
+odel.png>] [9 <./images/Fig16_CoalescentProbDist.png> <./images/Fig17_Multispec
+iesCoalescent.png>] <images/Fig18_AlternateReconciliations.png, id=186, 445.665
+pt x 281.05pt>
 File: images/Fig18_AlternateReconciliations.png Graphic file (type png)
 <use images/Fig18_AlternateReconciliations.png>
 Package pdftex.def Info: images/Fig18_AlternateReconciliations.png used on inpu
-t line 369.
+t line 348.
 (pdftex.def)             Requested size: 445.66391pt x 281.0493pt.
-<images/Fig19_GeneTreeInaccuracies.png, id=192, 603.25375pt x 389.455pt>
+<images/Fig19_GeneTreeInaccuracies.png, id=187, 603.25375pt x 389.455pt>
 File: images/Fig19_GeneTreeInaccuracies.png Graphic file (type png)
 <use images/Fig19_GeneTreeInaccuracies.png>
 Package pdftex.def Info: images/Fig19_GeneTreeInaccuracies.png used on input li
-ne 376.
+ne 355.
 (pdftex.def)             Requested size: 603.25227pt x 389.45404pt.
 [10 <./images/Fig18_AlternateReconciliations.png> <./images/Fig19_GeneTreeInacc
 uracies.png>] (./Lecture21_Phylogenomics_standalone.bbl [11]
@@ -804,13 +794,13 @@ not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 7.
  ) 
 Here is how much of TeX's memory you used:
- 11573 strings out of 493488
- 170519 string characters out of 3141326
- 284508 words of memory out of 3000000
+ 11568 strings out of 493488
+ 170489 string characters out of 3141326
+ 283508 words of memory out of 3000000
  14412 multiletter control sequences out of 15000+200000
  11849 words of font info for 46 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,12n,43p,874b,435s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,11n,43p,874b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
@@ -822,11 +812,11 @@ al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
 texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
 exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
 live/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Lecture21_Phylogenomics_standalone.pdf (12 pages, 997758 byte
+Output written on Lecture21_Phylogenomics_standalone.pdf (12 pages, 997825 byte
 s).
 PDF statistics:
- 281 PDF objects out of 1000 (max. 8388607)
- 231 compressed objects within 3 object streams
- 64 named destinations out of 1000 (max. 500000)
+ 275 PDF objects out of 1000 (max. 8388607)
+ 225 compressed objects within 3 object streams
+ 59 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 

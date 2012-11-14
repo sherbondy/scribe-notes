@@ -8,7 +8,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Multispecies Coalescent Model. Leaf branches track one lineage. There is a lag time from when population separated and when two actual gene lineages find a common ancestor. The rate of coalescent slows down as N gets bigger and for short branches. Deep coalescent is depicted in light blue for three lineages. The species and gene tree are incongruent since C and D are sisters in gene tree but not the species tree. There is a $\frac  {2}{3}$ chance that incongruence will occur because once we get to the light blue section, the Wright-fisher is memory less and there is only $\frac  {1}{3}$ chance that it will be congruent. Effect of incongruence is called incomplete lineage sorting.\relax }}{9}{figure.caption.19}}
 \@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces MPR reconciliation of genes and species tree.\relax }}{9}{figure.caption.20}}
 \@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Inaccuracies in gene tree.\relax }}{10}{figure.caption.21}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Heuristic tree search in character-based reconstruction\relax }}{4}{figure.caption.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Heuristic tree search in character-based reconstruction\relax }}{3}{figure.caption.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Scoring metric for heuristic tree search\relax }}{4}{figure.caption.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Site evolution uses the Jukes-Cantor model\relax }}{4}{figure.caption.5}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Sequence evolution is the product of site evolution\relax }}{4}{figure.caption.6}}
@@ -17,7 +17,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Gene Family Evolution: Gene Trees and Species Trees\relax }}{5}{figure.caption.9}}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Maximum Parsimony Reconciliation (MPR) \relax }}{5}{figure.caption.10}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Maximum Parsimony Reconciliation Recursive Algorithm\relax }}{6}{figure.caption.11}}
-\@writefile{lof}{\contentsline {xsect}{Conclusion}{11}{Item.8}}
+\@writefile{lof}{\contentsline {xsect}{Conclusion}{11}{Item.3}}
 \@writefile{lof}{\contentsline {xsect}{Current Research Directions}{11}{section.7}}
 \@writefile{lof}{\contentsline {xsect}{Further Reading}{11}{section.8}}
 \@writefile{lof}{\contentsline {xsect}{Inferring Orthologs/Paralogs, Gene Duplication and Loss}{5}{figure.caption.8}}
@@ -28,7 +28,7 @@
 \@writefile{lof}{\contentsline {xsect}{SPIDIR:Background}{8}{figure.caption.19}}
 \@writefile{lof}{\contentsline {xsect}{Tools and Techniques}{11}{section.9}}
 \@writefile{lof}{\contentsline {xsect}{What Have We Learned?}{11}{section.10}}
-\@writefile{lot}{\contentsline {xsect}{Conclusion}{11}{Item.8}}
+\@writefile{lot}{\contentsline {xsect}{Conclusion}{11}{Item.3}}
 \@writefile{lot}{\contentsline {xsect}{Current Research Directions}{11}{section.7}}
 \@writefile{lot}{\contentsline {xsect}{Further Reading}{11}{section.8}}
 \@writefile{lot}{\contentsline {xsect}{Inferring Orthologs/Paralogs, Gene Duplication and Loss}{5}{figure.caption.8}}

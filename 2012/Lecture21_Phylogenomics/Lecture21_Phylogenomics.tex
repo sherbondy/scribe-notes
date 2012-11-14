@@ -2,7 +2,7 @@
 \title{6.047/6.878 Lecture 21: Phylogenomics II {\tmabbr{}}}
 \author{Guest Lecture by\\
   Matt Rasmussen \\
-  Scribed by Jerry Wang and Dhruv Garg}
+  Orit Giguzinsky and Ethan Sherbondy}
 \maketitle
 \chead{6.047/6.878 Lecture 21: Phylogenomics II}
 \lhead{}
@@ -15,7 +15,7 @@
 \chapter{Phylogenomics II}
 \author{Guest Lecture by\\
   Matt Rasmussen \\
-  Scribed by Jerry Wang and Dhruv Garg}
+  2012: Updated by Orit Giguzinsky and Ethan Sherbondy}
 \chead{6.047/6.878 Lecture 21: Phylogenomics II}
 \lhead{} 
 \rhead{} 
@@ -35,34 +35,13 @@
 % ####################################################################
 \section{Introduction}
 
-Guest lecturer Matt Rasmussen, a former student of Manolis’s presented
-our secondphylogenomics lecture. The lecture finished explaining max
-likelihood methods for phylogenetics,and then progressed to more
-advanced uses of phylogenetics such as inferring orthologs, paralogs,
-gene duplication and gene loss. This led to learning across gene trees
-and modeling populations and allele frequencies.
+In the previous chapter, we covered techniques for reasoning about evolution in terms of trees of descent. The algorithms we covered for tree-building, UPGMA and neighbor-joining, assumed that we were comparing fully aligned sections of sequences.
 
-In previous lectures, we studied various algorithms to obtain
-phylogenetic species trees. Similar studies can be performed to study
-phylogeny of gene families, or sets of orthologous and paralogous
-genes. Given multiply aligned sequences, several techniques discussed
-in previous lectures could be employed for constructing a gene tree,
-including nearest neighbor joining, and hierarchical clustering. If in
-addition to the aligned genes, we also have a species tree (which can
-often be taken as a given for sufficiently diverged species), then we
-should be able to formulate a consistent view of the evolutionary
-process; namely, we hope to map the gene tree onto the species
-tree. These mappings between the two trees are called
-reconciliations. The standard phylogenomic pipeline can be summarized
-as follows:
+In this section, we present additional models for using phylogenetic trees in different contexts. Here we clarify the differences between species and gene trees. We then cover a framework called reconciliation which lets us effectively combine the two by mapping gene trees onto species trees. This mapping gives us a means of inferring gene duplication and loss events.
 
-\begin{enumerate}
-\item Blast protein sequences against each other to score similarities.
-\item Use this metric to cluster genes into families of relatedness. 
-\item Build multiple alignments. 
-\item From the alignments, build gene trees. 
-\item Reconcile the gene tree to the species tree. 
-\end{enumerate} 
+We will also present a phylogenetic perspective for reasoning about population genetics. Since population genetics deals with relatively recent mutation events, we offer the Wright-Fisher model as a tool for representing changes in whole populations. Unfortunately, when dealing with real-world data, we usually are only able to sequence genes from the current living descendants of a group. As a remedy to this shortcoming, we cover the Coalescent model, which you can think of as a time-reversed Wright-Fischer analog.
+
+By using coalescence, we gain a new means for estimating divergence times and population sizes across multiple species. At the end of the chapter, we touch briefly on the challenges of using trees to model recombination events and summarize recent work in the field along with frontiers open for exploration.
 
 \subsection{Phylogenetics}
 The two main pipe lines for building trees are distance-based and

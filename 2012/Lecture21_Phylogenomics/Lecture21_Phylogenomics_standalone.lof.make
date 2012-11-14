@@ -1,5 +1,5 @@
 \contentsline {xsect}{Introduction}{3}{section*.2}
-\contentsline {figure}{\numberline {1}{\ignorespaces Heuristic tree search in character-based reconstruction\relax }}{4}{figure.caption.3}
+\contentsline {figure}{\numberline {1}{\ignorespaces Heuristic tree search in character-based reconstruction\relax }}{3}{figure.caption.3}
 \contentsline {figure}{\numberline {2}{\ignorespaces Scoring metric for heuristic tree search\relax }}{4}{figure.caption.4}
 \contentsline {figure}{\numberline {3}{\ignorespaces Site evolution uses the Jukes-Cantor model\relax }}{4}{figure.caption.5}
 \contentsline {figure}{\numberline {4}{\ignorespaces Sequence evolution is the product of site evolution\relax }}{4}{figure.caption.6}
@@ -23,7 +23,7 @@
 \contentsline {figure}{\numberline {18}{\ignorespaces MPR reconciliation of genes and species tree.\relax }}{9}{figure.caption.20}
 \contentsline {figure}{\numberline {19}{\ignorespaces Inaccuracies in gene tree.\relax }}{10}{figure.caption.21}
 \contentsline {xsect}{SPIDIR: Method and Model}{10}{figure.caption.21}
-\contentsline {xsect}{Conclusion}{11}{Item.8}
+\contentsline {xsect}{Conclusion}{11}{Item.3}
 \contentsline {xsect}{Current Research Directions}{11}{section.7}
 \contentsline {xsect}{Further Reading}{11}{section.8}
 \contentsline {xsect}{Tools and Techniques}{11}{section.9}
