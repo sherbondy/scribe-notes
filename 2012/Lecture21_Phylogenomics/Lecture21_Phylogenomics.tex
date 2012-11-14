@@ -45,37 +45,41 @@ By using coalescence, we gain a new means for estimating divergence times and po
 
 \section{Inferring Orthologs/Paralogs, Gene Duplication and Loss}
 
-\noindent There are two commonly used trees, Species tree and Gene tree. 
+\noindent There are two commonly used trees, Species tree and Gene tree. This section explains how these trees can be used and how to fit a gene tree inside a species tree (reconciliation).
 
 \subsection {Species Tree}
 Species trees that show how different species evolved from one another. These trees are created using morphological characters, fossil evidence, etc. The leaves of each tree are labeled as species and the rest of the tree shows how these species are related.  An example of a species tree is shown in Figure~\ref{SpeciesTree}.
 
-\begin{figure}[ht!]
+\begin{figure}[H]
   \centering
-  \scalebox{.5}{\includegraphics{\getdir/SpeciesTree.png}}
+  \scalebox{.4}{\includegraphics{\getdir/SpeciesTree.png}}
   \caption{Species Tree}
   \label{SpeciesTree}
 \end{figure}
 
 \subsection {Gene Tree}
-Gene trees are trees that look at specific genes in different species (leaves are genes). The leaves of gene trees are labled with gene sequences or gene ids associated with specific sequences. Figure~\ref{GeneTree} shows an example of a gene tree that has 4 genes (leaves). The sequences associated with each gene are presented on the right side of Figure~\ref{GeneTree}.
-\begin{figure}[ht!]
+Gene trees are trees that look at specific genes in different species (leaves are genes). The leaves of gene trees are labeled with gene sequences or gene ids associated with specific sequences. Figure~\ref{GeneTree} shows an example of a gene tree that has 4 genes (leaves). The sequences associated with each gene are presented on the right side of Figure~\ref{GeneTree}.
+\begin{figure}[H]
   \centering
-  \scalebox{.7}{\includegraphics{\getdir/GeneTree.png}}
+  \scalebox{.5}{\includegraphics{\getdir/GeneTree.png}}
   \caption{Gene Tree}
   \label{GeneTree}
 \end{figure}
 
 \subsection{Gene Family Evolution}
-Gene trees evolve inside a species tree. This section explains how we can fit gene trees inside a species trees. An example of a gene tree contained in a species tree is shown in Figure~\ref{GeneSpecies} below.
+Gene trees evolve inside a species tree.  An example of a gene tree contained in a species tree is shown in Figure~\ref{GeneSpecies} below.
 
-\begin{figure}[ht!]
+\begin{figure}[H]
   \centering
-  \scalebox{.3}{\includegraphics{\getdir/GeneSpecies.png}}
+  \scalebox{.4}{\includegraphics{\getdir/GeneSpecies.png}}
   \caption{Gene Tree Inside a Species Tree}
   \label{GeneSpecies}
 \end{figure}
+The next sub section explains how we can fit gene trees inside a species trees using Reconciliation.
 
+\subsection{Reconciliation}
+
+\noindent Reconciliation is an algorithm that helps compare gene trees to genome trees by fitting a gene tree fits inside a species tree. This is done by by mapping the vertices in the gene tree to vertices in the species tree. This sub section will focus on Reconciliation, related definitions, algorithm (Maximum Parsimony Reconciliation algorithm) and examples. 
 \subsubsection{Definitions}
 Two genes are {\bf orthologs} if their recent common ancestor (MRCA) is a speciation (splitting into different species).
 \newline {\bf Paralogs} are genes whose MRCA is a duplication.
@@ -83,18 +87,30 @@ Two genes are {\bf orthologs} if their recent common ancestor (MRCA) is a specia
  
 \begin{figure}[H]
   \centering
-  \scalebox{.3}{\includegraphics{\getdir/Fig07_GeneFamilyEvolution.png}}
+  \scalebox{.25}{\includegraphics{\getdir/Fig07_GeneFamilyEvolution.png}}
   \caption{Gene Family Evolution: Gene Trees and Species Trees}
   \label{Fig07_GeneFamilyEvolution}
 \end{figure}
 
-\subsubsection{Reconciliation}
+A mapping diagram is a diagram that shows the node mapping from the gene tree to the species tree. Figure~\ref{MappingDiagram} shows an example of a mapping diagram.
 
-\noindent Reconciliation is an algorithm that helps determine how a gene tree fits inside a species tree by mapping the vertices in the gene tree to vertices in the species tree. 
-\newline
-\newline
-{\bf Maximum Parsimony Reconciliation (MPR) algorithm}
+\begin{figure}[H]
+  \centering
+  \scalebox{.4}{\includegraphics{\getdir/MappingDiagram.png}}
+  \caption{Mapping Diagram}
+  \label{MappingDiagram}
+\end{figure}
 
+A nesting diagram shows how the gene tree can be nested inside the species tree. For every mapping diagram there is a nesting diagram. Figure~\ref{NestingDiagram} shows an example of a possible nesting diagram for the mapping diagram in Figure~\ref{MappingDiagram}.
+\begin{figure}[H]
+  \centering
+  \scalebox{.4}{\includegraphics{\getdir/NestingDiagram.png}}
+  \caption{Nesting Diagram}
+  \label{NestingDiagram}
+\end{figure}
+
+\subsubsection{Maximum Parsimony Reconciliation (MPR) algorithm}
+MPR is an algorithm that fits a gene tree in a species tree while minimizing the number of duplications and deletions.
 \begin{figure}[H]
   \centering
   \scalebox{.3}{\includegraphics{\getdir/Fig08_MaximumParsimonyReconciliation.png}}
@@ -104,16 +120,51 @@ Two genes are {\bf orthologs} if their recent common ancestor (MRCA) is a specia
 
 \noindent Given a gene tree and a species tree, the algorithm finds the reconciliation that minimizes the number of duplications and deletions. Figure~\ref{Fig08_MaximumParsimonyReconciliation} above shows an example of a possible mapping from a gene tree to a species tree. Figure~\ref{Fig09_MPRAlgorithm} presents the pseudocode for the MPR algorithm.
 
-\begin{figure}[ht!]
+\begin{figure}[H]
   \centering
   \scalebox{.3}{\includegraphics{\getdir/Fig09_MPRAlgorithm.png}}
   \caption{Maximum Parsimony Reconciliation Recursive Algorithm} 
   \label{Fig09_MPRAlgorithm}
 \end{figure}
 
-Duplication events map to the same as both of its children. Loss event
-maps to gap in the mapping. Gene tree accuracy is important; even one
-branch misplaced can dramatically increase error.
+\noindent We map the arrows low as possible, since lower mapping usually results in fewer events. However, we cannot map too low. We map as low as we can without violating the descendent-ancestor relationships. The algorithm goes recursively from bottom up, starting from the leaves. We already know the mapping for the leaves, so we can easily map them. To map the ancestors, for each node (going recusively up the tree) we look at the right child and left child and take the least common ancestor (LCA) of the species that they map to. If a node maps to its right or left child, we know there is a duplication. An expected branch that does not exist indicates a loss.   
+%\noindent Duplication events map to the same as both of its children. Loss event
+%maps to gap in the mapping. Gene tree accuracy is important; even one
+%branch misplaced can dramatically increase error.
+
+\subsubsection{Reconciliation Examples}
+
+\begin{figure}[H]
+  \centering
+  \scalebox{.5}{\includegraphics{\getdir/ReconciliationExample1.png}}
+  \caption{Reconciliation Example 1, simple mapping case} 
+  \label{ReconciliationExample1}
+\end{figure}
+In Figure~\ref{ReconciliationExample1}, the nodes can be mapped straight across, since there are no duplications or losses.
+
+\begin{figure}[H]
+  \centering
+  \scalebox{.5}{\includegraphics{\getdir/ReconciliationExample2.png}}
+  \caption{Reconciliation Example 2, parsimonious reconciliation for complex case} 
+  \label{ReconciliationExample2}
+\end{figure}
+\noindent In Figure~\ref{ReconciliationExample2}, we see a parsimonious (minimum number of losses and duplications) reconciliation for a case in which nodes from the gene tree cannot be mapped straight across.  
+
+\begin{figure}[H]
+  \centering
+  \scalebox{.5}{\includegraphics{\getdir/ReconciliationExample3.png}}
+  \caption{Reconciliation Example 3, non parsimonious reconciliation for complex case} 
+  \label{ReconciliationExample3}
+\end{figure}
+\noindent Figure~\ref{ReconciliationExample3} shows a non-parsimonious reconciliation . The parsimonious mapping for the same trees is shown in Figure~\ref{ReconciliationExample1}.
+
+\begin{figure}[H]
+  \centering
+  \scalebox{.5}{\includegraphics{\getdir/ReconciliationExample4.png}}
+  \caption{Reconciliation Example 4, invalid Reconciliation} 
+  \label{ReconciliationExample4}
+\end{figure}
+\noindent Figure~\ref{ReconciliationExample4}  shows an invalid reconciliation. This reconciliation is \underline{invalid} since it does not respect descendent-ancestor relationships. In order for this reconciliation to be possible, the descendent would have to travel back in time and be created before its ancestor. Clearly, such a scenario would be impossible. A valid reconciliation must satisfy the following: {\bf If a $<$ b in G, then R[a] $\le$ R[b] in S}.
 
 \section{Learning Across Gene Trees}
 
