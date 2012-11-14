@@ -43,137 +43,66 @@ We will also present a phylogenetic perspective for reasoning about population g
 
 By using coalescence, we gain a new means for estimating divergence times and population sizes across multiple species. At the end of the chapter, we touch briefly on the challenges of using trees to model recombination events and summarize recent work in the field along with frontiers open for exploration.
 
-\subsection{Phylogenetics}
-The two main pipe lines for building trees are distance-based and
-character-based. Last lecture focused on distance-based pipeline. In
-distance-based, you form a pair-wise distance matrix using
-Jukes-Cantor or Kimura. Then use Neighbor Joining or UPGMA to
-reconstruct a tree from the matrix. Distance based pipelines use a
-fixed number of steps so and UPGMA and NJ have a running time is
-$O(n^3)$. However, there are flaws to this approach. Distance-based
-metrics are overly simplified and under measure the rate of mutation
-because a nucleotide that gets mutated back to its original form is
-counted as not mutated.
-
-Today’s lecture focuses on the character-based pipeline, which is NP
-Hard so we have to resort to heuristics. The basic idea is we want to
-search through different trees and test each one. We start with an
-initial tree, then compute the probability/likelihood, then explore
-the tree space using methods such as nearest neighbor interchange
-(NNI), compute the score again, loop and then return the tree with the
-highest score as the answer. Using NNI, we can go to all trees in the
-tree space. The problem is that the tree space is very big (why it is
-NP hard).
-
-\begin{figure}[ht!]
-  \centering
-  \scalebox{.3}{\includegraphics{\getdir/Fig01_HeuristicTreeSearch.png}}
-  \caption{Heuristic tree search in character-based reconstruction}
-  \label{Fig01_HeuristicTreeSearch}
-\end{figure}
-
-\noindent For the scoring metric, we want to maximize
-
-\begin{figure}[ht!]
-  \centering
-  \scalebox{.3}{\includegraphics{\getdir/Fig02_MLScoringStep.png}}
-  \caption{Scoring metric for heuristic tree search}
-  \label{Fig02_MLScoringStep}
-\end{figure}
-
-Using the Felsenstein peeling algorithm, we can efficiently compute
-$P(X|T,B)$ by buildign up a dynamic programming problem. We can first
-look at site evolution along a single brance, then build on that and
-look at sequence evolution and then look at site evolution along an
-entire tree. Site evolution uses the Jukes-Cantor model and has the
-definition
-
-\begin{figure}[ht!]
-  \centering
-  \scalebox{.3}{\includegraphics{\getdir/Fig03_SiteEvolution.png}}
-  \caption{Site evolution uses the Jukes-Cantor model}
-  \label{Fig03_SiteEvolution}
-\end{figure}
-\noindent If we assume site independence, sequence evolution is just
-the product of site evolution:
-
-\begin{figure}[ht!]
-  \centering
-  \scalebox{.3}{\includegraphics{\getdir/Fig04_SequenceEvolution.png}}
-  \caption{Sequence evolution is the product of site evolution}
-  \label{Fig04_SequenceEvolution}
-\end{figure}
-
-\noindent Assuming site independence does not always hold for example
-in RNA coding r gions the sites is not independent due to RNA
-folding. To move to sequence evolution over an entire tree, we assume
-branch independence once we condition on the parent sequence.
-
-\begin{figure}[ht!]
-  \centering
-  \scalebox{.3}{\includegraphics{\getdir/Fig05_SequenceEvolutionOverTree.png}}
-  \caption{Sequence evolution over an entire tree.}
-  \label{Fig05_SequenceEvolutionOverTree}
-\end{figure}
-
-\noindent From the equation in sequence evolution over an entire tree,
-we need both internal nodes and leaves $(x_1,...x_{2n-1})$ but only
-leaves $(x_1,...x_n)$ are given so we need to marginalize over
-unknowns $(x_{n+1},...,x_{2n-1})$. Using a factorization trick:
-
-$P(x_1,x_2,x_3,x_4|T,t)$ 
-$= \Sigma x_5 \Sigma x_6 \Sigma x_7 P(x_1,x_2,x_3,x_4,x_5,x_6,x_7|T,t)$
-
-$= \Sigma x_5 \Sigma x_6 \Sigma x_7 P(x_1|x_5,t_1)P(x_2|x_5,t_1)P(x_3|x_6,t_3)P(x_4|x_6,t_4)$ 
-
-$= \Sigma x_7 P(x_7)$
-$[\Sigma x_5 P(x_5|x_7,t_5)P(x_1|x_5,t_1)P(x_2|x_5,t_1)]$
-$[\Sigma x_6 P(x_6|x_7,t_6)P(x_3|x_6,t_3)P(x_4|x_6,t_4)]$
-
-\noindent The Peeling algorithm builds a DP table. Each entry contains
-the probability of seeing the leaf data below node I, give that node I
-has base a at site j. The leaves of the table are initialized based on
-the observed sequence. Entries are populated in post-order
-traversal. The runtime of the Peeling algorithm is $O(nmk^2)$.
-
-\begin{figure}[ht!]
-  \centering
-  \scalebox{.3}{\includegraphics{\getdir/Fig06_PeelingAlgorithm.png}}
-  \caption{Peeling Algorithm}
-  \label{Fig06_PeelingAlgorithm}
-\end{figure}
-
-\noindent The Peeling algorithm scores one tree and we need to use the
-search algorithm to search for more trees. The runtime is for one tree
-while the entire runtime depends on how many trees you want to look
-at.
-
 \section{Inferring Orthologs/Paralogs, Gene Duplication and Loss}
 
-\noindent There are two commonly used trees. The species tree uses
-morphological characters, fossil evidence, etc to create a tree of how
-species are related (leaves are species). Gene trees look at specific
-genes in different species (leaves are genes).
+\noindent There are two commonly used trees, Species tree and Gene tree. 
+
+\subsection {Species Tree}
+Species trees that show how different species evolved from one another. These trees are created using morphological characters, fossil evidence, etc. The leaves of each tree are labeled as species and the rest of the tree shows how these species are related.  An example of a species tree is shown in Figure~\ref{SpeciesTree}.
 
 \begin{figure}[ht!]
+  \centering
+  \scalebox{.5}{\includegraphics{\getdir/SpeciesTree.png}}
+  \caption{Species Tree}
+  \label{SpeciesTree}
+\end{figure}
+
+\subsection {Gene Tree}
+Gene trees are trees that look at specific genes in different species (leaves are genes). The leaves of gene trees are labled with gene sequences or gene ids associated with specific sequences. Figure~\ref{GeneTree} shows an example of a gene tree that has 4 genes (leaves). The sequences associated with each gene are presented on the right side of Figure~\ref{GeneTree}.
+\begin{figure}[ht!]
+  \centering
+  \scalebox{.7}{\includegraphics{\getdir/GeneTree.png}}
+  \caption{Gene Tree}
+  \label{GeneTree}
+\end{figure}
+
+\subsection{Gene Family Evolution}
+Gene trees evolve inside a species tree. This section explains how we can fit gene trees inside a species trees. An example of a gene tree contained in a species tree is shown in Figure~\ref{GeneSpecies} below.
+
+\begin{figure}[ht!]
+  \centering
+  \scalebox{.3}{\includegraphics{\getdir/GeneSpecies.png}}
+  \caption{Gene Tree Inside a Species Tree}
+  \label{GeneSpecies}
+\end{figure}
+
+\subsubsection{Definitions}
+Two genes are {\bf orthologs} if their recent common ancestor (MRCA) is a speciation (splitting into different species).
+\newline {\bf Paralogs} are genes whose MRCA is a duplication.
+\newline Figure~\ref{Fig07_GeneFamilyEvolution} below illustrates how these types of genes can be represented in a gene tree. The tree below has 4 speciation nodes, one duplication and one loss.
+ 
+\begin{figure}[H]
   \centering
   \scalebox{.3}{\includegraphics{\getdir/Fig07_GeneFamilyEvolution.png}}
   \caption{Gene Family Evolution: Gene Trees and Species Trees}
   \label{Fig07_GeneFamilyEvolution}
 \end{figure}
 
-\noindent Reconciliation is an algorithm to figure out how the gene tree fits inside  he species tree. It maps the vertices in the gene tree to vertices in the species tree. 
+\subsubsection{Reconciliation}
 
-\begin{figure}[ht!]
+\noindent Reconciliation is an algorithm that helps determine how a gene tree fits inside a species tree by mapping the vertices in the gene tree to vertices in the species tree. 
+\newline
+\newline
+{\bf Maximum Parsimony Reconciliation (MPR) algorithm}
+
+\begin{figure}[H]
   \centering
   \scalebox{.3}{\includegraphics{\getdir/Fig08_MaximumParsimonyReconciliation.png}}
   \caption{Maximum Parsimony Reconciliation (MPR) } 
   \label{Fig08_MaximumParsimonyReconciliation}
 \end{figure}
 
-\noindent We want to minimize the duplication/loss so we want to map
-events as low in the tree as possible to when they happened to
-minimize loss.
+\noindent Given a gene tree and a species tree, the algorithm finds the reconciliation that minimizes the number of duplications and deletions. Figure~\ref{Fig08_MaximumParsimonyReconciliation} above shows an example of a possible mapping from a gene tree to a species tree. Figure~\ref{Fig09_MPRAlgorithm} presents the pseudocode for the MPR algorithm.
 
 \begin{figure}[ht!]
   \centering
@@ -184,7 +113,7 @@ minimize loss.
 
 Duplication events map to the same as both of its children. Loss event
 maps to gap in the mapping. Gene tree accuracy is important; even one
-branch misplaced can dramatically increases error.
+branch misplaced can dramatically increase error.
 
 \section{Learning Across Gene Trees}
 
