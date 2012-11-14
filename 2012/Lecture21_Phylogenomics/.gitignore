@@ -1,0 +1,14 @@
+*.make
+*.log
+*.aux
+*.lof
+*.log
+*.toc
+*.bbl
+*.blg
+*.d
+*.fls
+*.idx
+*.maf
+*.mtc
+*.out
