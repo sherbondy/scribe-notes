@@ -166,7 +166,23 @@ In Figure~\ref{ReconciliationExample1}, the nodes can be mapped straight across,
 \end{figure}
 \noindent Figure~\ref{ReconciliationExample4}  shows an invalid reconciliation. This reconciliation is \underline{invalid} since it does not respect descendent-ancestor relationships. In order for this reconciliation to be possible, the descendent would have to travel back in time and be created before its ancestor. Clearly, such a scenario would be impossible. A valid reconciliation must satisfy the following: {\bf If a $<$ b in G, then R[a] $\le$ R[b] in S}.
 
-\section{Learning Across Gene Trees}
+\section{Reconstruction}
+In the previous section we learned how  to compare gene trees and species trees. In this section, we will use this information to reconstruct gene trees and species trees. 
+
+\subsection{Species Tree Reconstruction}
+In the past, it was really hard to identify a marker gene for a specific species. As sequencing improved we started having lots of sequencing data, people started building trees for different loci. The tree you got highly dependent on the tree you used. Possible reasons why trees differ include noise (from statistical estimate errors and noise), hidden duplications and losses and allele sorting in a population.
+
+\begin{figure}[H]
+  \centering
+  \scalebox{.5}{\includegraphics{\getdir/SpeciesTreeReconstruction.png}}
+  \caption{Species Tree Reconstruction} 
+  \label{SpeciesTreeReconstruction}
+\end{figure}
+
+Given lots of different gene trees that disagree, our goal is to make them into once species tree (as shown in Figure~\ref{SpeciesTreeReconstruction}. There are lots of different algorithms that reconstruct species trees. These algorithms include Supermatrix methods (Rokas 2003, Ciccareli 2006), Supertree methods (Creevey \& McInerney 2005), Minimizing Deep Coalescence (Maddison \& Knowles 2006) and  Modeling coalescence (Liu \& Pearl 2007). 
+
+\subsection{Improving Gene Tree Reconstruction and Learning Across Gene Trees}
+We can use methods similar to those described above to build better gene trees. This can be done by using information from a species tree to study a gene tree of interest. For example, species trees can be used to determine when losses and duplications occurred. The idea is that we can use the fact that species trees are often built from the entire genome, to obtain more information about related gene trees.
 
 \begin{figure}[ht!]
   \centering
@@ -175,8 +191,7 @@ In Figure~\ref{ReconciliationExample1}, the nodes can be mapped straight across,
   \label{Fig10_LearningAcrossGeneTrees}
 \end{figure}
 
-If we knew the species tree we could know beforehand that we expect
-the branch to be longer. We can develop a model for what kind of
+If we know the species tree, we can develop a model for what kind of
 branch lengths we can expect. We can use conserved gene order to tell
 orthologs and build trees.
 
