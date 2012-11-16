@@ -227,7 +227,7 @@ to make sense of how alleles spread through a population, it's helpful
 to have a model to compare data against. The \textbf{Wright-Fisher} 
 reproduction model has filled this role for the past 70 years.
 
-\subsection{Wright-Fisher Model}
+\subsection{The Wright-Fisher Model}
 
 Like HMMs, Wright-Fisher is a Markov process: at each step, the system
 randomly progresses, and the current state of the system depends only 
@@ -253,7 +253,7 @@ In English, here's how Wright-Fisher works:
 
 At every generation, for each child, we randomly select from the parents (with replaccement). The allele of the child becomes that of the randomly selected parent.
 
-Repeat this process for many generation, with the children serving as the new parents, ignoring the ordering of chromosomes.
+We repeat this process for many generation, with the children serving as the new parents, ignoring the ordering of chromosomes.
 
 
 It really is that simple. To determine the probability of $k$ copies of an allele
@@ -264,16 +264,22 @@ generation, we can use this formula:
 \binom{2N}{k} p^{k} q^{2N-k}
 \end{align}
 
+Here, $q = (1-p)$. It is the frequency of non-p alleles in the parent generation.
+
 \begin{figure} [ht!] 
   \centering 
   \scalebox{.3}{\includegraphics{\getdir/Fig13_FisherWrightModel.png}}
   \caption{The Wright-Fisher model}
   \label{Fig13_FisherWrightModel}
-\end{figure} 
+\end{figure}
 
-\noindent Continue for many generations and ignore ordering of chromosomes.
+Now we can begin to explore such questions as: how probable is it and how many generations is it expected to take for a given allele to become \textbf{fixed}, meaning the allele is present in \textit{every} member of the population?
 
-\subsection{Coalescent Model}
+The expected time (in generations) for fixation, given the assumptions made by Wright-Fisher, is proportionate to $4N_{E}$, where $N_{E}$ is the effective population size.
+
+Again, it's important to keep in mind the limitations of this model and ask if it actually makes sense for the system you're trying to represent. Consider how you could tweak the proposed model to account for a selection coefficient ranging between -1 (lethal negative selection) and 1 (strong positive selection).
+
+\subsection{The Coalescent Model}
 
 
 
