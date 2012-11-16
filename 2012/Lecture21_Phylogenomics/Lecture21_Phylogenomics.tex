@@ -153,14 +153,50 @@ species specific which is customized to a specific species.
 
 \noindent This method greatly improves reconstruction accuracy.
 
+
 \section{Modeling Population and Allele Frequencies}
-People keep sequencing genomes so looking at how populations evolve is
-becoming more and more important and feasible. The Wright-fisher model
-is used to study drifts, bottlenecks, etc. The coalescent model
-combines the Wright-fisher with trees. Wright-fisher was designed to
-study the effect of finite population sizes. We need to assume
-population size is fixed at $N$, random mating, non-overlapping
-generations.
+With the advent of next-gen sequencing, it is becoming economical to
+sequence the genomes of many individuals within a population. In order
+to make sense of how alleles spread through a population, it's helpful
+to have a model to compare data against. The \textbf{Wright-Fisher} 
+reproduction model has filled this role for the past 70 years.
+
+\subsection{Wright-Fisher}
+
+Like HMMs, Wright-Fischer is a Markov process: at each step, the system
+randomly progresses, and the current state of the system depends only 
+on the previous state. In this case, state transitions represent reproduction.
+By modeling the transmission of chromosomes to offspring, we can study genetic drift.
+
+The model makes a number of simplifying assumptions:
+\begin{enumerate}
+\item Population size, \textbf{N}, is constant at each generation.
+\item Only members of the same generation reproduce (no overlap)
+\item Reproduction occurs at random
+\item The gene being modeled only has 2 alleles
+\item Genes are neutrally selected for
+\end{enumerate}
+
+Note that Wright-Fisher is not an appropriate choice if you're trying to
+model the change in frequency of a gene that is positively or negatively
+selected for. If we use Wright-Fisher to model the chromosomes of diploid
+individuals, the population size of the model becomes \textbf{2N}.
+
+
+In English, here's how Wright-Fisher works:
+
+At every generation, for each child, we randomly select from the parents (with replaccement). The allele of the child becomes that of the randomly selected parent.
+
+Repeat this process for many generation, with the children serving as the new parents, ignoring the ordering of chromosomes.
+
+
+It really is that simple. To determine the probability of $k$ copies of an allele
+existing in the child generation when it had a frequency of $p$ in the parent
+generation, we can use this formula:
+
+\begin{align}
+\binom{2N}{k} p^{k} q^{2N-k}
+\end{align}
 
 \begin{figure} [ht!] 
   \centering 
@@ -170,6 +206,10 @@ generations.
 \end{figure} 
 
 \noindent Continue for many generations and ignore ordering of chromosomes.
+
+\subsection{Coalescent Model}
+
+
 
 \begin{figure} [ht!] 
   \centering 
