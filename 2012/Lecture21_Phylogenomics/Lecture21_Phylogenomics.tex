@@ -192,7 +192,7 @@ There is another way to reconstruct a species tree, which is effective in case t
 
 
 \subsection{Improving Gene Tree Reconstruction and Learning Across Gene Trees}
-We can use methods similar to those described above to build better gene trees. This can be done by using information from a species tree to study a gene tree of interest. For example, species trees can be used to determine when losses and duplications occurred. The idea is that we can use the fact that species trees are often built from the entire genome, to obtain more information about related gene trees.
+We can use methods similar to those described above to build better gene trees. This can be done by using information from a species tree to study a gene tree of interest. For example, species trees can be used to determine when losses and duplications occurred. The idea is that we can use the fact that species trees are often built from the entire genome, to obtain more information about related gene trees. We can use both the branch length and the number of events to do this. 
 
 \begin{figure}[ht!]
   \centering
@@ -214,10 +214,10 @@ orthologs and build trees.
   \label{Fig11_DevelopingRatesModel}
 \end{figure}
 
-When gene is fast evolving in one species, it is fast evolving in all
+When a gene is fast evolving in one species, it is fast evolving in all
 species. We can model a branch length as two different rate
-components. One is gene specific(present across all species) and a
-species specific which is customized to a specific species.
+components. One is gene specific(present across all species) and the other is
+species specific, which is customized to a specific species.
 
 \begin{figure} [ht!] 
   \centering
