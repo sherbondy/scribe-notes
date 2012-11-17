@@ -296,7 +296,7 @@ The expected time (in generations) for fixation, given the assumptions made by W
 
 Again, it's important to keep in mind the limitations of this model and ask if it actually makes sense for the system you're trying to represent. Consider how you could tweak the proposed model to account for a selection coefficient ranging between -1 (lethal negative selection) and 1 (strong positive selection).
 
-\pagebreak
+
 \subsection{The Coalescent Model}
 
 The problem with the Wright-Fisher model is that it assumes you know the allele frequencies of the ancentral generation. When dealing with the genomes of present species, these quantities are unknown. The Coalescent Model solves this conundrum by thinking retrospectively. That is to say: we start with the alleles of the \textit{current} generation, and work our way \textit{backwards} in time. The basic Coalescence Model makes the same assumptions as Wright-Fisher. At each generation, we ask: what is the probability of the two identical alleles coalescing, or sharing a parent, in the previous generation.
@@ -361,7 +361,9 @@ congruent. The effect of incongruence is called \textbf{Incomplete Lineage Sorti
 
 You can build a maximum parsimony species tree based on the notion of minimizing the number of ILS events rather than minimizing implied duplication/loss events as covered previously. It is even possible to combine these two methods to, ideally, create a phylogeny that is more accurate than either of them would be individually.
 
-\section{SPIDIR:Background} 
+\section{SPIDIR}
+
+\subsection{Background} 
 As presented in the supplementary information for SPIDIR, a gene
 family is the set of genes that are descendents of a single gene in
 the most recent common ancestor (MRCA) of all species under
@@ -435,7 +437,7 @@ developments: \cite{Akerborg} a Bayesian method with relaxed clock and
 \cite{Rasmussen2011}, a Bayesian method with gene and species specific
 relaxed rates (an extension to SPIDIR) .
 
-\section{SPIDIR: Method and Model} 
+\subsection{Method and Model} 
 SPIDIR exemplifies an iterative algorithm for gene tree construction
 using the species tree. In SPIDIR, the authors define a generative
 model for gene-tree evolution. This consists of a prior for gene-tree
