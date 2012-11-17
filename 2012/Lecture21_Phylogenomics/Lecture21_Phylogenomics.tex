@@ -243,6 +243,13 @@ The model makes a number of simplifying assumptions:
 \item Genes undergo neutral selection.
 \end{enumerate}
 
+\begin{figure} [ht!] 
+  \centering 
+  \scalebox{.3}{\includegraphics{\getdir/Fig13_FisherWrightModel.png}}
+  \caption{The Wright-Fisher model}
+  \label{Fig13_FisherWrightModel}
+\end{figure}
+
 Note that Wright-Fisher is not an appropriate choice if you're trying to
 model the change in frequency of a gene that is positively or negatively
 selected for. If we use Wright-Fisher to model the chromosomes of diploid
@@ -266,11 +273,11 @@ generation, we can use this formula:
 
 Here, $q = (1-p)$. It is the frequency of non-p alleles in the parent generation.
 
-\begin{figure} [ht!] 
+\begin{figure} [h] 
   \centering 
-  \scalebox{.3}{\includegraphics{\getdir/Fig13_FisherWrightModel.png}}
-  \caption{The Wright-Fisher model}
-  \label{Fig13_FisherWrightModel}
+  \scalebox{.3}{\includegraphics{\getdir/Fig14_FisherWrightManyGenerations.png}}
+  \caption{Many iterations of Wright-Fisher yielding a lineage tree}
+  \label{Fig14_FisherWrightManyGenerations}
 \end{figure}
 
 Now we can begin to explore such questions as: how probable is it and how many generations is it expected to take for a given allele to become \textbf{fixed}, meaning the allele is present in \textit{every} member of the population?
@@ -279,34 +286,35 @@ The expected time (in generations) for fixation, given the assumptions made by W
 
 Again, it's important to keep in mind the limitations of this model and ask if it actually makes sense for the system you're trying to represent. Consider how you could tweak the proposed model to account for a selection coefficient ranging between -1 (lethal negative selection) and 1 (strong positive selection).
 
+\pagebreak
 \subsection{The Coalescent Model}
 
+The problem with the Wright-Fisher model is that it assumes you know the allele frequencies of the ancentral generation. When dealing with the genomes of present species, these quantities are unknown. The Coalescent Model solves this conundrum by thinking retrospectively. That is to say: we start with the alleles of the \textit{current} generation, and work our way \textit{backwards} in time. The basic Coalescence Model makes the same assumptions as Wright-Fisher. At each generation, we ask: what is the probability of the two identical alleles coalescing, or sharing a parent, in the previous generation.
 
+We can pose the probability of a coalescence event occuring in the previous generation as the probability of coalescence \textit{not} occuring in any of the $t-1$ generations prior to the last one, times the probability of it occuring in the previous (the t-th) generation. This is equivalent to the expression:
 
-\begin{figure} [ht!] 
-  \centering 
-  \scalebox{.3}{\includegraphics{\getdir/Fig14_FisherWrightManyGenerations.png}}
-  \caption{The Wright-Fisher model continued over many generations and
-    ignoring the ordering of chromosomes.}
-  \label{Fig14_FisherWrightManyGenerations}
-\end{figure} 
+\begin{align}
+P_c(t) = \left(1-\frac{1}{2N_e}\right)^{t-1} \left(\frac{1}{2N_e}\right)
+\end{align}
 
-The coalescent model only focuses on the genealogy. It only is
-concerned about the lineages we have sequences for; do not have to
-worry about others. It is a probabilistic model that works backwards
-in time to find when they have common ancestors.
+Where $N_e$ is the effective population size.
 
 \begin{figure} [ht!] 
   \centering 
   \scalebox{.3}{\includegraphics{\getdir/Fig15_CoalescentModel.png}}
   \caption{The coalescent model.}
   \label{Fig15_CoalescentModel}
-\end{figure} 
+\end{figure}
 
-Say we have $2N$ individuals, what is the probability that k lineages
-do not have any coalescent events in parental generation? What is the
-probability that the first coalescent of $k$ lineages is at $t$
-generations? This process can be seen as a geometric distribution.
+By approximating this geometric distribution as an exponential one: $ P_c(t) = \frac{1}{2N_e}e^{- \left( \frac{t-1}{2N_e} \right)}$, we can determine the expected number of generations back until coalescence, which turns out to be $2N_e$, with a standard deviation of $2N_e$.
+
+To ask about the coalescence of \textit{multiple} lineages at a given generation, we must, as in Wright-Fisher, use a binomial distribution. The probability of $k$ lineages coalescing for the \textit{first} time at generation t is:
+
+\begin{align}
+  P(T_k = t) = \left( 1 - \binom{k}{2} \frac{1}{2N} \right)^{t-1} \binom{k}{2} \frac{1}{2N}
+\end{align}
+ 
+And again, this can be approximated with an exponential distribution for sufficiently large k. The individual at which two lineages converge is referred to as the \textbf{Most Recent Common Ancestor}. By continually moving backwards until all ancestors coalesce, we end up with a new kind of tree! And by comparing the tree resulting from coalescence with a gene tree we've constructed, discrepancies between the two may signal that certain assumptions of the Coalescent Model have been violated. Namely, selection may be occuring.
 
 \begin{figure} [ht!] 
   \centering 
@@ -315,27 +323,33 @@ generations? This process can be seen as a geometric distribution.
   \label{Fig16_CoalescentProbDist}
 \end{figure} 
 
-\noindent Can repeat to find when all individuals coalesce. Each
-branch of species tree can be seen as having its own Wright-Fisher
-inside of it.
+\pagebreak
+\subsection{The Multispecies Coalescent Model}
 
 \begin{figure} [ht!] 
   \centering 
   \scalebox{.3}{\includegraphics{\getdir/Fig17_MultispeciesCoalescent.png}}
-  \caption{Multispecies Coalescent Model. Leaf branches track one
-    lineage. There is a lag time from when population separated and
-    when two actual gene lineages find a common ancestor. The rate of
-    coalescent slows down as N gets bigger and for short
-    branches. Deep coalescent is depicted in light blue for three
-    lineages. The species and gene tree are incongruent since C and D
-    are sisters in gene tree but not the species tree. There is a
-    $\frac{2}{3}$ chance that incongruence will occur because once we
-    get to the light blue section, the Wright-fisher is memory less
-    and there is only $\frac{1}{3}$ chance that it will be
-    congruent. Effect of incongruence is called incomplete lineage
-    sorting.}
+  \caption{Multispecies Coalescent Model.}
   \label{Fig17_MultispeciesCoalescent}
-\end{figure} 
+\end{figure}
+
+We can take this idea once step further and track coalescence events 
+across multiple species. Here, each genome of an individual species is treated as a lineage.
+
+Note that there is a lag time between the separation of two populations and 
+the time at which two gene lineages coalesce into a common ancestor.
+Also note how the rate of coalescence slows down as N gets bigger and for short branches.
+
+In the image above, deep coalescence is depicted in light blue for three 
+lineages. The species and gene trees here are incongruent since 
+C and D are sisters in gene tree but not the species tree.
+
+There is a $\frac{2}{3}$ chance that incongruence 
+will occur because once we get to the light blue section, Wright-Fisher
+is memoryless and there is only $\frac{1}{3}$ chance that it will be
+congruent. The effect of incongruence is called \textbf{Incomplete Lineage Sorting}. By measuring the frequency at which \textbf{ILS} occurs, we gain insight into unusually large populations or unsually short branch lengths within the species tree.
+
+You can build a maximum parsimony species tree based on the notion of minimizing the number of ILS events rather than minimizing implied duplication/loss events as covered previously. It is even possible to combine these two methods to, ideally, create a phylogeny that is more accurate than either of them would be individually.
 
 \section{SPIDIR:Background} 
 As presented in the supplementary information for SPIDIR, a gene
@@ -472,6 +486,14 @@ for the full likelihood computation.
 fungi. SPIDER recovered over 96\% of the synteny orthologs while other
 algorithms found less than 65\%. As a result, SPIDER invoked much
 fewer number of duplications and losses.
+
+\section{Ancestral Recombination Graphs}
+
+\todo[Next Year]{Song, Yuns}{Fill in this section based on: www.eecs.berkeley.edu/~yss/Pub/SH-JCB05.pdf and the course notes from 2012.}
+
+\subsection{The Sequentially Markov Coalescent}
+
+\todo[Next Year]{Song, Yuns}{Fill this in based on: http://www.ncbi.nlm.nih.gov/pubmed/21270390}
 
 \section{Conclusion} 
 Incorporating species tree information into the gene tree building
