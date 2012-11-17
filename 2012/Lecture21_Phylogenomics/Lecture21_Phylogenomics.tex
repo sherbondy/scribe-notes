@@ -172,6 +172,8 @@ In the previous section we learned how  to compare gene trees and species trees.
 \subsection{Species Tree Reconstruction}
 In the past, it was really hard to identify a marker gene for a specific species. As sequencing improved we started having lots of sequencing data, people started building trees for different loci. The tree you got highly dependent on the tree you used. Possible reasons why trees differ include noise (from statistical estimate errors and noise), hidden duplications and losses and allele sorting in a population.
 
+\subsubsection{Species Tree Reconstruction Problem}
+
 \begin{figure}[H]
   \centering
   \scalebox{.5}{\includegraphics{\getdir/SpeciesTreeReconstruction.png}}
@@ -181,8 +183,16 @@ In the past, it was really hard to identify a marker gene for a specific species
 
 Given lots of different gene trees that disagree, our goal is to make them into once species tree (as shown in Figure~\ref{SpeciesTreeReconstruction}. There are lots of different algorithms that reconstruct species trees. These algorithms include Supermatrix methods (Rokas 2003, Ciccareli 2006), Supertree methods (Creevey \& McInerney 2005), Minimizing Deep Coalescence (Maddison \& Knowles 2006) and  Modeling coalescence (Liu \& Pearl 2007). 
 
+One way to do this, which is mostly effective for noisy data, is to
+pull more data together in order to increase accuracy. This is done by concatenating gene alignments into a super-matrix.
+
+Another method involves building a tree for each one and using a consensus method to summarize these trees. Then we identify branches that frequently across the trees and build a species tree that has the branches that occur most frequently.
+
+There is another way to reconstruct a species tree, which is effective in case the gene trees disagree because of duplications and losses. The goal is to find the species tree that applies the fewest duplications. We build all the gene trees and then propose a species tree. Next, we use reconciliation to determine the number of events each gene tree combined with the proposed species tree implies. Then, we propose other species trees and move branches around. Wrong species trees tend to have lots of events that did not happen. The correct tree should have the fewest number of events. 
+
+
 \subsection{Improving Gene Tree Reconstruction and Learning Across Gene Trees}
-We can use methods similar to those described above to build better gene trees. This can be done by using information from a species tree to study a gene tree of interest. For example, species trees can be used to determine when losses and duplications occurred. The idea is that we can use the fact that species trees are often built from the entire genome, to obtain more information about related gene trees.
+We can use methods similar to those described above to build better gene trees. This can be done by using information from a species tree to study a gene tree of interest. For example, species trees can be used to determine when losses and duplications occurred. The idea is that we can use the fact that species trees are often built from the entire genome, to obtain more information about related gene trees. We can use both the branch length and the number of events to do this. 
 
 \begin{figure}[ht!]
   \centering
@@ -204,10 +214,10 @@ orthologs and build trees.
   \label{Fig11_DevelopingRatesModel}
 \end{figure}
 
-When gene is fast evolving in one species, it is fast evolving in all
+When a gene is fast evolving in one species, it is fast evolving in all
 species. We can model a branch length as two different rate
-components. One is gene specific(present across all species) and a
-species specific which is customized to a specific species.
+components. One is gene specific(present across all species) and the other is
+species specific, which is customized to a specific species.
 
 \begin{figure} [ht!] 
   \centering
